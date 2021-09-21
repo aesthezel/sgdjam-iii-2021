@@ -1,25 +1,35 @@
-﻿using System;
-using Code.Hero.Interactions;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Code.Hero
 {
-    public class Mind
+    public class Mind : MonoBehaviour
     {
-        [SerializeField] private int _id;
-        public int ID
+        [SerializeField] PlayerReceiver _playerReceiver;
+        
+        private Rigidbody2D _rigidbody2D;
+
+        [ReadOnly] private int _inputIndex;
+        public int InputIndex
         {
-            get => _id;
+            get => _inputIndex;
         }
         
         [SerializeField] private PlayerInput _playerInput;
 
-        private Vector2 _suggestedDirection;
+        private void Awake()
+        {
+            _playerReceiver = GameObject.FindWithTag("Player").GetComponent<PlayerReceiver>();
+            _inputIndex = _playerInput.playerIndex;
+        }
 
-        public Action<IInteraction> OnInteractionPerform;
-
-        public void PerformMoveViaInput(InputAction.CallbackContext context) => 
-            _suggestedDirection = context.ReadValue<Vector2>();
+        public void PerformMoveViaInput(InputAction.CallbackContext context)
+        {
+            var movement = context.ReadValue<Vector2>();
+            Debug.Log(movement);
+            
+            _playerReceiver.HorizontalDirection = movement.x;
+        }
     }
 }
