@@ -19,7 +19,7 @@ namespace Code.Hero
 
         private void FixedUpdate()
         {
-            _rigidbody2D.velocity += new Vector2(HorizontalDirection, 0f) * _speed * Time.deltaTime;
+            _rigidbody2D.velocity += Vector2.right * (HorizontalDirection * _speed * Time.deltaTime);
         }
     }
 }
