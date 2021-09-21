@@ -17,22 +17,22 @@ namespace Settings.Input
     ""name"": ""GameInput"",
     ""maps"": [
         {
-            ""name"": ""FirstMind"",
-            ""id"": ""5950bec6-71f0-4296-be1f-2c1972849bb5"",
+            ""name"": ""Player"",
+            ""id"": ""79dbc6a2-b258-4366-9279-8128115a870a"",
             ""actions"": [
                 {
                     ""name"": ""Movement"",
-                    ""type"": ""Button"",
-                    ""id"": ""e1f3e5d3-292d-4433-80cb-7d2c767acc46"",
-                    ""expectedControlType"": ""Button"",
+                    ""type"": ""Value"",
+                    ""id"": ""1d8d46a0-179b-434a-90bc-163ab9be25f6"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""ca02ac47-c994-46dd-9137-2e7ddff91063"",
+                    ""name"": ""WASD"",
+                    ""id"": ""1e6e1743-7d79-47ae-9e75-8f72bfd9c0c5"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -43,68 +43,52 @@ namespace Settings.Input
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""159086e0-0dbe-4f1f-811b-75433b5d37f0"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""id"": ""c4259d58-d672-49f2-9fdc-a73541290061"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""26bca5ec-90ff-4dd4-8181-36394df1e078"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""id"": ""a9751ad9-f8bf-4605-961a-89223b97757e"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""51e8d05c-069d-42ff-b179-247ec8bcb66f"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""id"": ""690d1c16-087e-4a86-8736-b51c59df0536"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""68caf65d-bc16-4ec0-82b2-a76719195ec1"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""id"": ""ce4d5cde-ccf7-4921-9c7d-a01bf2eda175"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                }
-            ]
-        },
-        {
-            ""name"": ""SecondMind"",
-            ""id"": ""e30a5773-437a-4303-9469-d6db10ae5891"",
-            ""actions"": [
+                },
                 {
-                    ""name"": ""Movement"",
-                    ""type"": ""Button"",
-                    ""id"": ""26a99bb4-bb06-4456-9914-907e123f88b1"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""32ceb85e-3186-403b-b982-9eead13f79c7"",
-                    ""path"": ""2DVector"",
+                    ""name"": ""1D Axis"",
+                    ""id"": ""64182710-dbd1-4db4-994e-2896966a5ebf"",
+                    ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -113,45 +97,23 @@ namespace Settings.Input
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""3dd50b07-d3e3-4fff-93a7-284e05d8fe34"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""994322fd-a24d-494a-80cb-d8585512b0d7"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""d58d9376-ea0e-4468-a1b0-6c322ea842d9"",
+                    ""name"": ""negative"",
+                    ""id"": ""1401f404-8672-4c8e-9ce6-5755db345450"",
                     ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""right"",
-                    ""id"": ""e991c511-63e0-415d-8972-0f04cc650f38"",
+                    ""name"": ""positive"",
+                    ""id"": ""9984a4b0-f4bb-4497-b645-d2cda9c29ede"",
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -159,14 +121,34 @@ namespace Settings.Input
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
-            // FirstMind
-            m_FirstMind = asset.FindActionMap("FirstMind", throwIfNotFound: true);
-            m_FirstMind_Movement = m_FirstMind.FindAction("Movement", throwIfNotFound: true);
-            // SecondMind
-            m_SecondMind = asset.FindActionMap("SecondMind", throwIfNotFound: true);
-            m_SecondMind_Movement = m_SecondMind.FindAction("Movement", throwIfNotFound: true);
+            // Player
+            m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+            m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -213,29 +195,29 @@ namespace Settings.Input
             asset.Disable();
         }
 
-        // FirstMind
-        private readonly InputActionMap m_FirstMind;
-        private IFirstMindActions m_FirstMindActionsCallbackInterface;
-        private readonly InputAction m_FirstMind_Movement;
-        public struct FirstMindActions
+        // Player
+        private readonly InputActionMap m_Player;
+        private IPlayerActions m_PlayerActionsCallbackInterface;
+        private readonly InputAction m_Player_Movement;
+        public struct PlayerActions
         {
             private @GameInput m_Wrapper;
-            public FirstMindActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Movement => m_Wrapper.m_FirstMind_Movement;
-            public InputActionMap Get() { return m_Wrapper.m_FirstMind; }
+            public PlayerActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Movement => m_Wrapper.m_Player_Movement;
+            public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(FirstMindActions set) { return set.Get(); }
-            public void SetCallbacks(IFirstMindActions instance)
+            public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+            public void SetCallbacks(IPlayerActions instance)
             {
-                if (m_Wrapper.m_FirstMindActionsCallbackInterface != null)
+                if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
                 {
-                    @Movement.started -= m_Wrapper.m_FirstMindActionsCallbackInterface.OnMovement;
-                    @Movement.performed -= m_Wrapper.m_FirstMindActionsCallbackInterface.OnMovement;
-                    @Movement.canceled -= m_Wrapper.m_FirstMindActionsCallbackInterface.OnMovement;
+                    @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                    @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                    @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 }
-                m_Wrapper.m_FirstMindActionsCallbackInterface = instance;
+                m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
                 {
                     @Movement.started += instance.OnMovement;
@@ -244,45 +226,26 @@ namespace Settings.Input
                 }
             }
         }
-        public FirstMindActions @FirstMind => new FirstMindActions(this);
-
-        // SecondMind
-        private readonly InputActionMap m_SecondMind;
-        private ISecondMindActions m_SecondMindActionsCallbackInterface;
-        private readonly InputAction m_SecondMind_Movement;
-        public struct SecondMindActions
+        public PlayerActions @Player => new PlayerActions(this);
+        private int m_KeyboardSchemeIndex = -1;
+        public InputControlScheme KeyboardScheme
         {
-            private @GameInput m_Wrapper;
-            public SecondMindActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Movement => m_Wrapper.m_SecondMind_Movement;
-            public InputActionMap Get() { return m_Wrapper.m_SecondMind; }
-            public void Enable() { Get().Enable(); }
-            public void Disable() { Get().Disable(); }
-            public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(SecondMindActions set) { return set.Get(); }
-            public void SetCallbacks(ISecondMindActions instance)
+            get
             {
-                if (m_Wrapper.m_SecondMindActionsCallbackInterface != null)
-                {
-                    @Movement.started -= m_Wrapper.m_SecondMindActionsCallbackInterface.OnMovement;
-                    @Movement.performed -= m_Wrapper.m_SecondMindActionsCallbackInterface.OnMovement;
-                    @Movement.canceled -= m_Wrapper.m_SecondMindActionsCallbackInterface.OnMovement;
-                }
-                m_Wrapper.m_SecondMindActionsCallbackInterface = instance;
-                if (instance != null)
-                {
-                    @Movement.started += instance.OnMovement;
-                    @Movement.performed += instance.OnMovement;
-                    @Movement.canceled += instance.OnMovement;
-                }
+                if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+                return asset.controlSchemes[m_KeyboardSchemeIndex];
             }
         }
-        public SecondMindActions @SecondMind => new SecondMindActions(this);
-        public interface IFirstMindActions
+        private int m_GamepadSchemeIndex = -1;
+        public InputControlScheme GamepadScheme
         {
-            void OnMovement(InputAction.CallbackContext context);
+            get
+            {
+                if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+                return asset.controlSchemes[m_GamepadSchemeIndex];
+            }
         }
-        public interface ISecondMindActions
+        public interface IPlayerActions
         {
             void OnMovement(InputAction.CallbackContext context);
         }
