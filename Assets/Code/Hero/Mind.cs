@@ -26,10 +26,8 @@ namespace Code.Hero
 
         public void PerformMoveViaInput(InputAction.CallbackContext context)
         {
-            var movement = context.ReadValue<Vector2>();
-            Debug.Log(movement);
-            
-            _playerReceiver.HorizontalDirection = movement.x;
+            if (_playerReceiver != null)
+                _playerReceiver.HorizontalDirection = context.ReadValue<Vector2>().x;
         }
     }
 }
