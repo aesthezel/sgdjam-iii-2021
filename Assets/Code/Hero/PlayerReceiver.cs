@@ -47,22 +47,21 @@ namespace Code.Hero
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _mapper = GetComponent<InputMapper>();
-            
+        }
+
+        private void Start()
+        {
             // Por cada input asignamos el error a reiniciar esta clase
             // Esto esta bien y por ahora es super necesario
             var keys = _mapper.ActionMapper.Keys;
             foreach (var key in keys)
             {
-                _mapper.ActionMapper.TryGetValue(key, out var actions);
-                actions.failed += ResetInputEventSystem;
+                if (_mapper.ActionMapper.TryGetValue(key, out var action)) 
+                    action.failed += ResetInputEventSystem;
             }
             
-            var jsuccess = _mapper.ActionMapper.TryGetValue("Jump", out var jumpEvents);
             var asuccess = _mapper.ActionMapper.TryGetValue("Dash", out var dashEvents);
-            
-            Assert.IsTrue(jsuccess, "Jump error");
             Assert.IsTrue(asuccess, "Dash error");
-            
             
             // Testing Dash
             dashEvents.start += (t) =>
@@ -82,13 +81,13 @@ namespace Code.Hero
                 transform.DOMoveX(transform.position.x + movDistance, 0.5f);
             };
             
-           dashEvents.failed += ( ) =>
-           {
-               _cameraTween.Kill();
-               _cameraTween = Camera.main.DOOrthoSize(6, 0.2f);
-               GetComponentInChildren<SpriteRenderer>().color = Color.white;
-               Debug.Log("Dash Fallado");
-           };
+            dashEvents.failed += ( ) =>
+            {
+                _cameraTween.Kill();
+                _cameraTween = Camera.main.DOOrthoSize(6, 0.2f);
+                GetComponentInChildren<SpriteRenderer>().color = Color.white;
+                Debug.Log("Dash Fallado");
+            };
         }
 
         private void Update()

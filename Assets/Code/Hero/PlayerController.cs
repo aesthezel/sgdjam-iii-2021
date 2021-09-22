@@ -18,10 +18,30 @@ namespace Code.Hero
         private Rigidbody2D _myRigidBody;
         private InputMapper _mapper;
         
-        // TODO: Implementar una especie de coyote time
         private bool _isGrounded;
-        public bool IsGrounded => _isGrounded;
+        private Coroutine _coyoteCoroutine;
+        private bool coyoteCheck;
+        
+        public bool IsGrounded
+        {
+            get => _isGrounded;
+            private set
+            {
+                // From air to ground
+                if(!_isGrounded && value)
+                    _mapper.ActionMapper["Jump"].failed?.Invoke();
+                
+                // From ground to air
+                if (_isGrounded && !value && !coyoteCheck)
+                    StartCoroutine(CoyoteTime(0.15f));
+                
+                _isGrounded = value;
+            }
+        }
 
+        //----------------
+        // UNITY METHODS
+        //----------------
         private void Awake()
         {
             _myRigidBody = GetComponent<Rigidbody2D>();
@@ -30,25 +50,37 @@ namespace Code.Hero
 
         private void Start()
         {
-            Debug.Log(_mapper.ActionMapper);
+            SubscribeJumpActions();
+        }
+
+        private void Update()
+        {
+            CheckGrounded();
+        }
+
+
+        //---------------------------------
+        // SUBSCRIPTIONS TO INPUT ACTIONS
+        //---------------------------------
+        private void SubscribeJumpActions()
+        {
             var bJumAction = _mapper.ActionMapper.TryGetValue("Jump", out var jumpEvents);
             Assert.IsTrue(bJumAction, "$Jump input action not found in $InputMapper");
 
             jumpEvents.start += PerformNormalJump;
             jumpEvents.ok += PerformSuperJump;
+            // TODO: No llamar al salto cancelado si realmente no ha saltado
+            jumpEvents.failed += () => Debug.Log("SALTO CANCELADO!");
         }
-
-
-        private void Update()
-        {
-            CheckGrounded();
-            
-        }
-
+        
+        //---------
+        // JUMPS
+        //---------
         private void PerformNormalJump(float reactionTime)
         {
-            if (_isGrounded)
+            if (IsGrounded)
             {
+                coyoteCheck = false;
                 _myRigidBody.velocity = new Vector2(_myRigidBody.velocity.x, 0);
                 _myRigidBody.AddForce(Vector2.up * 3, ForceMode2D.Impulse);
             }
@@ -60,29 +92,47 @@ namespace Code.Hero
             _myRigidBody.AddForce(Vector2.up * 6, ForceMode2D.Impulse);
         }
         
-
+        //----------------
+        // GROUND CHECK
+        //----------------
         private void CheckGrounded()
         {
-            var enabledCheckers = 0;
-            var lastValue = _isGrounded;
-            
-            for (int i = 0; i < groundCheckers.Length; i++)
-            {
-                bool hit = Physics2D.Raycast(groundCheckers[i].position, Vector2.down, 0.2f);
+            var checkers = 0;
 
-                if (hit)
-                    enabledCheckers += 1;
+            foreach (var checker in groundCheckers)
+            {
+                if (Physics2D.Raycast(checker.position, Vector2.down, 0.2f, whatIsGround))
+                    checkers++;
+            }
+
+            IsGrounded = checkers > 0 ? true : false;
+        }
+
+        //--------------
+        // COYOTE TIME
+        //--------------
+        private IEnumerator CoyoteTime(float t)
+        {
+            // If jumping don't activate Coyote Time
+            if (_myRigidBody.velocity.y > 0) yield break;
+
+            coyoteCheck = true;
+            
+            var elapsedTime = 0f;
+
+            while (elapsedTime < t)
+            {
+                IsGrounded = true;
+                elapsedTime += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
             }
             
-            _isGrounded = enabledCheckers == groundCheckers.Length? true: false;
-            
-
-            if (!lastValue && _isGrounded)
-                _mapper.ActionMapper["Jump"].failed?.Invoke();
-            
-            Debug.Log(_isGrounded);
+            // TODO: Eliminar
+            GetComponentInChildren<SpriteRenderer>().color = Color.green;
+            IsGrounded = false;
         }
-        
+
+        // GIZMOS...
         private void OnDrawGizmos()
         {
             foreach (var t in groundCheckers)
