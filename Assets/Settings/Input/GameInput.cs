@@ -35,6 +35,14 @@ namespace Settings.Input
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""50483138-16ea-46e6-9412-ca9021012189"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -279,6 +287,28 @@ namespace Settings.Input
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""77bb4c40-cd9c-4021-98da-f96accea66bc"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89bf5ef9-10eb-40ea-b0b7-4dc925475c73"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -312,6 +342,7 @@ namespace Settings.Input
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+            m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -363,12 +394,14 @@ namespace Settings.Input
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_Movement;
         private readonly InputAction m_Player_Jump;
+        private readonly InputAction m_Player_Dash;
         public struct PlayerActions
         {
             private @GameInput m_Wrapper;
             public PlayerActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
+            public InputAction @Dash => m_Wrapper.m_Player_Dash;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -384,6 +417,9 @@ namespace Settings.Input
                     @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                    @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                    @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                    @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -394,6 +430,9 @@ namespace Settings.Input
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
+                    @Dash.started += instance.OnDash;
+                    @Dash.performed += instance.OnDash;
+                    @Dash.canceled += instance.OnDash;
                 }
             }
         }
@@ -420,6 +459,7 @@ namespace Settings.Input
         {
             void OnMovement(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnDash(InputAction.CallbackContext context);
         }
     }
 }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 namespace Code.Hero
 {
     public class Mind : MonoBehaviour
@@ -30,13 +31,12 @@ namespace Code.Hero
                 _playerReceiver.MovementInput(_inputIndex, context.ReadValue<Vector2>());
         }
 
-        public void JumpInput(InputAction.CallbackContext context)
+        public void PerformInput(InputAction.CallbackContext context)
         {
             if(_playerReceiver == null) return;
             
             if (context.performed)
-                _playerReceiver.JumpInputPressed(_inputIndex, context.action.name);
+                _playerReceiver.InputActionPerformed(_inputIndex, context.action.name);
         }
-        
     }
 }
