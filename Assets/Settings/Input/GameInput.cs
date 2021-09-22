@@ -154,7 +154,7 @@ namespace Settings.Input
                 {
                     ""name"": ""Up"",
                     ""id"": ""1401f404-8672-4c8e-9ce6-5755db345450"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""path"": ""<DualShockGamepad>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -165,7 +165,7 @@ namespace Settings.Input
                 {
                     ""name"": ""down"",
                     ""id"": ""9984a4b0-f4bb-4497-b645-d2cda9c29ede"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""path"": ""<DualShockGamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -176,7 +176,7 @@ namespace Settings.Input
                 {
                     ""name"": ""Left"",
                     ""id"": ""57c12714-4ed3-4246-8738-a4e20fc681c0"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""path"": ""<DualShockGamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -187,7 +187,7 @@ namespace Settings.Input
                 {
                     ""name"": ""Right"",
                     ""id"": ""39aa12e0-cc80-4835-a399-7941e883b201"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""path"": ""<DualShockGamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
