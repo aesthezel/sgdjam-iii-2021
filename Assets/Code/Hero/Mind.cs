@@ -24,10 +24,19 @@ namespace Code.Hero
             _inputIndex = _playerInput.playerIndex;
         }
 
-        public void PerformMoveViaInput(InputAction.CallbackContext context)
+        public void MovementInput(InputAction.CallbackContext context)
         {
-            if (_playerReceiver != null)
-                _playerReceiver.HorizontalDirection = context.ReadValue<Vector2>().x;
+            if(_playerReceiver != null)
+                _playerReceiver.MovementInput(_inputIndex, context.ReadValue<Vector2>());
         }
+
+        public void JumpInput(InputAction.CallbackContext context)
+        {
+            if(_playerReceiver == null) return;
+            
+            if (context.performed)
+                _playerReceiver.JumpInputPressed(_inputIndex, context.action.name);
+        }
+        
     }
 }
