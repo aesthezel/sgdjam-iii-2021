@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a29d63c1c94e3382f82c3c3a254af9, type: 3}
+  m_Name: ButtomUIIcons
+  m_EditorClassIdentifier: 
+  inputUIImages:
+  - inputName: Jump
+    uiButtom: {fileID: 21300000, guid: 2af3415de98d89d4f950fdf14917d0c1, type: 3}
+  - inputName: Dash
+    uiButtom: {fileID: 21300000, guid: 14459ac1643662344af0e8edfaf29098, type: 3}
