@@ -34,7 +34,7 @@ namespace Code.Hero
             foreach (var key in keys)
             {
                 if (_mapper.ActionMapper.TryGetValue(key, out var action)) 
-                    action.failed += ResetInputEventSystem;
+                    action.finished += ResetInputEventSystem;
             }
         }
 
@@ -75,30 +75,30 @@ namespace Code.Hero
             if (!outputs.Contains(false))
             {
                 actions.start?.Invoke(waitTime);
-                _waitingCoroutine = StartCoroutine(WaitForOtherMind(waitTime, actions.failed));
+                _waitingCoroutine = StartCoroutine(WaitForOtherMind(waitTime, actions.finished));
             }
             else
             {
                 Debug.Log($"Action <{_requiredActionToComplete}> was prohibited to perform");
-                actions.failed?.Invoke();
+                actions.finished?.Invoke();
             }
         }
 
         private void InputEventFinish(int mindId, string actionName)
         {
-            var success = _mapper.ActionMapper.TryGetValue(actionName, out var actions);
-
-            Assert.IsTrue(success, $"InputAction name {actionName} not found in <ActionMapper>");
-
+            var success = _mapper.ActionMapper.TryGetValue(_requiredActionToComplete, out var actions);
+            Assert.IsTrue(success, $"InputAction name {_requiredActionToComplete} not found in <ActionMapper>");
+            
             if (String.Equals(_requiredActionToComplete, actionName))
             {
                 // Event completed correctly
                 Debug.Log("IN TIME!");
-                actions.ok?.Invoke(_timeUntilComplete);  
+                actions.ok?.Invoke(_timeUntilComplete);
             }
-            // Don't matter if the event was completed successfully or not when second player inout is detected
+            // Doesn't matter if the event was completed successfully or not when second player inout is detected
             // the event must finish to give chance to other events to perform
-            actions.failed?.Invoke();
+            actions.finished?.Invoke();
+            ResetInputEventSystem();
         }
         
         private IEnumerator WaitForOtherMind(float time, Action actionOnFail)

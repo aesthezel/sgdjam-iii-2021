@@ -7,10 +7,10 @@ namespace Code.Hero
 {
     public class ActionSet
     {
-        public Func<float, bool> checker = f => true; //The default start will always work
+        public Func<float, bool> checker = f => true; //The default checker will always be true
         public Action<float> start;
         public Action<float> ok;
-        public Action failed;
+        public Action finished;
     }
     
     public class InputMapper: MonoBehaviour
@@ -19,7 +19,7 @@ namespace Code.Hero
         
         private GameInput _master;
 
-        // Dictionary with all events
+        // Dictionary containing the input names and events
         public Dictionary<string, ActionSet> ActionMapper { get; } = new Dictionary<string, ActionSet>();
 
         private void Awake()
