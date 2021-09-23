@@ -23,6 +23,9 @@ namespace Code.Hero
         // Jumping
         private bool _coyoteCheck;
         private bool _isGrounded;
+        private bool _jumping;
+        private bool _jumpCompleted;
+        
         // Movement
         private Vector2 _playerOneMovement;
         private Vector2 _playerTwoMovement;
@@ -33,9 +36,12 @@ namespace Code.Hero
             private set
             {
                 // From air to ground
-                if(!_isGrounded && value)
+                if (!_isGrounded && value && _jumping && !_jumpCompleted)
+                {
+                    _jumping = false;
                     _mapper.ActionMapper["Jump"].failed?.Invoke();
-                
+                }
+
                 // From ground to air
                 if (_isGrounded && !value && !_coyoteCheck)
                     StartCoroutine(CoyoteTime(0.15f));
@@ -116,22 +122,27 @@ namespace Code.Hero
             HorizontalDirection = ((_playerOneMovement + _playerTwoMovement) / 2f).x;
             _myRigidBody.velocity += Vector2.right * (HorizontalDirection * _speed * Time.deltaTime);
         }
-        
+
         //---------
         // JUMPS
         //---------
-        private void PerformNormalJump(float reactionTime)
+        private bool PerformNormalJump(float reactionTime)
         {
             if (IsGrounded)
             {
+                _jumping = true;
+                _jumpCompleted = false;
                 _coyoteCheck = false;
                 _myRigidBody.velocity = new Vector2(_myRigidBody.velocity.x, 0);
                 _myRigidBody.AddForce(Vector2.up * 3, ForceMode2D.Impulse);
             }
+            
+            return IsGrounded;
         }
 
         private void PerformSuperJump(float elapsedTime)
         {
+            _jumpCompleted = true;
             _myRigidBody.velocity = new Vector2(_myRigidBody.velocity.x, 0);
             _myRigidBody.AddForce(Vector2.up * 6, ForceMode2D.Impulse);
         }

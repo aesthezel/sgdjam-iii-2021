@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 236347109}
   - component: {fileID: 236347108}
   - component: {fileID: 236347107}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -791,7 +791,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930503542}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.09, y: -4.39, z: 0}
+  m_LocalPosition: {x: 1.09, y: 18.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 10730114}
@@ -824,7 +824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  lifes: 0
+  lifes: 5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
@@ -1019,7 +1019,7 @@ GameObject:
   - component: {fileID: 1343609949}
   - component: {fileID: 1343609948}
   - component: {fileID: 1343609950}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1578,7 +1578,7 @@ GameObject:
   - component: {fileID: 2050035090}
   - component: {fileID: 2050035089}
   - component: {fileID: 2050035088}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

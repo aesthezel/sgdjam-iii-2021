@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -12,7 +13,7 @@ namespace Code.Hero
         private string _requiredActionToComplete;
         private Coroutine _waitingCoroutine;
         private float _timeUntilComplete;
-        private int _firstMindId;
+        private int _firstMindId = -1;
 
         // Input Mapper
         private InputMapper _mapper;
@@ -66,9 +67,18 @@ namespace Code.Hero
             
             Assert.IsTrue(success, $"InputAction name {actionName} not found in <ActionMapper>");
 
-            // Event Starts
-            actions.start?.Invoke(waitTime);
-            _waitingCoroutine = StartCoroutine(WaitForOtherMind(waitTime, actions.failed));
+            // Event Starts: Methods are called sequentially so we can decide whether to run or not the Coroutine
+            var delegates = actions.start.GetInvocationList();
+
+            var outputs = delegates.Select(action => (bool) action.DynamicInvoke(waitTime)).ToList();
+            
+            if (!outputs.Contains(false))
+                _waitingCoroutine = StartCoroutine(WaitForOtherMind(waitTime, actions.failed));
+            else
+            {
+                Debug.Log($"Action <{_requiredActionToComplete}> was prohibited to perform");
+                actions.failed?.Invoke();
+            }
         }
 
         private void InputEventFinish(int mindId, string actionName)
@@ -83,10 +93,9 @@ namespace Code.Hero
                 Debug.Log("IN TIME!");
                 actions.ok?.Invoke(_timeUntilComplete);  
             }
-
-            else
-                // Event failed
-                actions.failed?.Invoke();
+            // Don't matter if the event was completed successfully or not when second player inout is detected
+            // the event must finish to give chance to other events to perform
+            actions.failed?.Invoke();
         }
         
         private IEnumerator WaitForOtherMind(float time, Action actionOnFail)
@@ -108,8 +117,8 @@ namespace Code.Hero
             if(_waitingCoroutine != null)
                 StopCoroutine(_waitingCoroutine);
             
-            _requiredActionToComplete = default;
-            _firstMindId = default;
+            _requiredActionToComplete = null;
+            _firstMindId = -1;
             _timeUntilComplete = 0;
             _waitingCoroutine = null;
         }
