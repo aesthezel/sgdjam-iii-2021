@@ -1,26 +1,31 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Assertions;
+using DG.Tweening;
 
 namespace Code.Hero
 {
     public class PlayerController : MonoBehaviour
     {
+        [Header("--- Player Stats ---")]
+        [SerializeField] private float _speed;
+        [SerializeField] private int lifes;
+        
+        [Header("-- Jumping --")]
         [SerializeField] private LayerMask whatIsGround;
-
-        [SerializeField, Header("Ground Checkers")]
+        [Space, SerializeField] 
         private Transform[] groundCheckers;
         
+        // Components
         private Rigidbody2D _myRigidBody;
         private InputMapper _mapper;
-        
+        // Jumping
+        private bool _coyoteCheck;
         private bool _isGrounded;
-        private Coroutine _coyoteCoroutine;
-        private bool coyoteCheck;
+        // Movement
+        private Vector2 _playerOneMovement;
+        private Vector2 _playerTwoMovement;
         
         public bool IsGrounded
         {
@@ -32,13 +37,17 @@ namespace Code.Hero
                     _mapper.ActionMapper["Jump"].failed?.Invoke();
                 
                 // From ground to air
-                if (_isGrounded && !value && !coyoteCheck)
+                if (_isGrounded && !value && !_coyoteCheck)
                     StartCoroutine(CoyoteTime(0.15f));
                 
                 _isGrounded = value;
             }
         }
+        
+        public float HorizontalDirection { get; private set; }
+        public int Lifes => lifes;
 
+        
         //----------------
         // UNITY METHODS
         //----------------
@@ -51,11 +60,18 @@ namespace Code.Hero
         private void Start()
         {
             SubscribeJumpActions();
+            SubscribeDashActions();
+            SubscribeMovementActions();
         }
 
         private void Update()
         {
             CheckGrounded();
+        }
+
+        private void FixedUpdate()
+        {
+            Move();
         }
 
 
@@ -72,6 +88,34 @@ namespace Code.Hero
             // TODO: No llamar al salto cancelado si realmente no ha saltado
             jumpEvents.failed += () => Debug.Log("SALTO CANCELADO!");
         }
+
+        private void SubscribeDashActions()
+        {
+            var bDashAction = _mapper.ActionMapper.TryGetValue("Dash", out var dashEvents);
+            Assert.IsTrue(bDashAction, "Dash input action not found in $InputMapper");
+
+            dashEvents.ok += Dash;
+        }
+
+        private void SubscribeMovementActions() => _mapper.OnMove += UpdateMovement;
+
+
+        //-----------
+        // MOVEMENT
+        //-----------
+        private void UpdateMovement(int mindId, Vector2 velocity)
+        {
+            if (mindId == 0)
+                _playerOneMovement = velocity;
+            else if (mindId == 1)
+                _playerTwoMovement = velocity;
+        }
+
+        private void Move()
+        {
+            HorizontalDirection = ((_playerOneMovement + _playerTwoMovement) / 2f).x;
+            _myRigidBody.velocity += Vector2.right * (HorizontalDirection * _speed * Time.deltaTime);
+        }
         
         //---------
         // JUMPS
@@ -80,7 +124,7 @@ namespace Code.Hero
         {
             if (IsGrounded)
             {
-                coyoteCheck = false;
+                _coyoteCheck = false;
                 _myRigidBody.velocity = new Vector2(_myRigidBody.velocity.x, 0);
                 _myRigidBody.AddForce(Vector2.up * 3, ForceMode2D.Impulse);
             }
@@ -91,6 +135,18 @@ namespace Code.Hero
             _myRigidBody.velocity = new Vector2(_myRigidBody.velocity.x, 0);
             _myRigidBody.AddForce(Vector2.up * 6, ForceMode2D.Impulse);
         }
+        
+        
+        //---------
+        // DASHES
+        //---------
+        private void Dash(float elapsedTIme)
+        {
+            //TODO: Cuidado (1 - ...) asume que el valor de espera a player 2 sera de 1 segundo
+            var movDistance = (1 - elapsedTIme) * 3f;
+            transform.DOMoveX(transform.position.x + movDistance, 0.5f).SetEase(Ease.OutQuad);
+        }
+        
         
         //----------------
         // GROUND CHECK
@@ -116,7 +172,7 @@ namespace Code.Hero
             // If jumping don't activate Coyote Time
             if (_myRigidBody.velocity.y > 0) yield break;
 
-            coyoteCheck = true;
+            _coyoteCheck = true;
             
             var elapsedTime = 0f;
 
@@ -126,10 +182,6 @@ namespace Code.Hero
                 elapsedTime += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
-            
-            // TODO: Eliminar
-            GetComponentInChildren<SpriteRenderer>().color = Color.green;
-            IsGrounded = false;
         }
 
         // GIZMOS...

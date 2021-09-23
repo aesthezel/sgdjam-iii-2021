@@ -14,6 +14,8 @@ namespace Code.Hero
     
     public class InputMapper: MonoBehaviour
     {
+        public Action<int, Vector2> OnMove;
+        
         private GameInput _master;
 
         // Dictionary with all events

@@ -6,7 +6,7 @@ namespace Code.UI
     public class HealthBar : MonoBehaviour
     {
         [SerializeField] private GameObject _healthIconPrefab;
-        [SerializeField] private PlayerReceiver _playerReceiver;
+        [SerializeField] private PlayerController _playerReceiver;
 
         private void Start()
         {

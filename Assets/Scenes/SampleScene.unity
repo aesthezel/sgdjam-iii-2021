@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthIconPrefab: {fileID: 515625458028032312, guid: 11e2f9b8a3abe6645a51e1557c78ab74, type: 3}
-  _playerReceiver: {fileID: 930503545}
+  _playerReceiver: {fileID: 930503548}
 --- !u!114 &292839748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -738,7 +738,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -783,8 +783,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b4ddba352fdb147a1a164260b6b613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lifes: 5
-  _speed: 10
 --- !u!4 &930503546
 Transform:
   m_ObjectHideFlags: 0
@@ -793,7 +791,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930503542}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.83, y: -4.39, z: 0}
+  m_LocalPosition: {x: 1.09, y: -4.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 10730114}
@@ -825,6 +823,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e1d82c10160d024fa6d7b3b208660b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 10
+  lifes: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
