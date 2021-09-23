@@ -19,10 +19,12 @@ namespace Code.Hero
         private GameInput _master;
 
         // Dictionary with all events
-        public Dictionary<string, ActionSet> ActionMapper { get; } = new Dictionary<string, ActionSet>();
+        public Dictionary<string, ActionSet> ActionMapper { get; private set; }
 
         private void Awake()
         {
+            ActionMapper = new Dictionary<string, ActionSet>();
+            
             _master = new GameInput();
             var inputsNames = _master.asset.actionMaps[0].actions;
             

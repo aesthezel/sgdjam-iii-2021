@@ -52,6 +52,22 @@ namespace Code.Hero
         
         public float HorizontalDirection { get; private set; }
         public int Lifes => lifes;
+        
+        [Header("-- Looking --")] 
+        [SerializeField] private Transform bodyPart;
+        
+        private bool _facingRight;
+        public bool FacingRight
+        {
+            get => _facingRight;
+            set 
+            {
+                Vector3 theScale = bodyPart.localScale;
+                theScale.x = value == false ? -1 : 1;
+                bodyPart.localScale = theScale;
+                _facingRight = value;
+            }
+        }
 
         
         //----------------
@@ -78,6 +94,11 @@ namespace Code.Hero
         private void FixedUpdate()
         {
             Move();
+        }
+
+        private void LateUpdate()
+        {
+            FacingRight = !(HorizontalDirection < -0.1f);
         }
 
 
