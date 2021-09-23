@@ -7,7 +7,8 @@ namespace Code.Hero
 {
     public class ActionSet
     {
-        public Func<float, bool> start = f => true; //The default start will always work
+        public Func<float, bool> checker = f => true; //The default start will always work
+        public Action<float> start;
         public Action<float> ok;
         public Action failed;
     }

@@ -68,12 +68,15 @@ namespace Code.Hero
             Assert.IsTrue(success, $"InputAction name {actionName} not found in <ActionMapper>");
 
             // Event Starts: Methods are called sequentially so we can decide whether to run or not the Coroutine
-            var delegates = actions.start.GetInvocationList();
+            var delegates = actions.checker.GetInvocationList();
 
             var outputs = delegates.Select(action => (bool) action.DynamicInvoke(waitTime)).ToList();
-            
+
             if (!outputs.Contains(false))
+            {
+                actions.start?.Invoke(waitTime);
                 _waitingCoroutine = StartCoroutine(WaitForOtherMind(waitTime, actions.failed));
+            }
             else
             {
                 Debug.Log($"Action <{_requiredActionToComplete}> was prohibited to perform");

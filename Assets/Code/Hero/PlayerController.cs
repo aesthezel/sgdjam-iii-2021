@@ -88,11 +88,9 @@ namespace Code.Hero
         {
             var bJumAction = _mapper.ActionMapper.TryGetValue("Jump", out var jumpEvents);
             Assert.IsTrue(bJumAction, "$Jump input action not found in $InputMapper");
-
-            jumpEvents.start += PerformNormalJump;
+            
+            jumpEvents.checker += PerformNormalJump;
             jumpEvents.ok += PerformSuperJump;
-            // TODO: No llamar al salto cancelado si realmente no ha saltado
-            jumpEvents.failed += () => Debug.Log("SALTO CANCELADO!");
         }
 
         private void SubscribeDashActions()
