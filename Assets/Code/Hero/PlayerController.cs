@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using Code.Data;
+using Code.Utils.Events;
 using UnityEngine;
 using UnityEngine.Assertions;
 using DG.Tweening;
@@ -21,6 +23,7 @@ namespace Code.Hero
 
         [Header("-- Looking --")] 
         [SerializeField] private Transform bodyPart;
+
         
         // Components
         private Rigidbody2D _myRigidBody;
@@ -59,7 +62,6 @@ namespace Code.Hero
         public float HorizontalDirection { get; private set; }
         public IntData Lifes => lifes;
 
-        
         private bool _facingRight;
         public bool FacingRight
         {
@@ -233,7 +235,7 @@ namespace Code.Hero
                 LastFullyOnGround = transform.position;
         }
         
-            //----------------
+        //----------------
         // GROUND CHECK
         //----------------
         private bool CheckGrounded()
