@@ -6,12 +6,12 @@
         InQuad,
         OutQuad,
         InOutQuad,
-        EaseInCubic,
-        EaseOutCubic,
-        EaseInOutCubic,
-        EaseInQuart,
-        EaseOutQuart,
-        EaseInOutQuart
+        InCubic,
+        OutCubic,
+        InOutCubic,
+        InQuart,
+        OutQuart,
+        InOutQuart
     }
 
     public static class Easing
@@ -29,25 +29,25 @@
                 case Ease.OutQuad:
                     return EaseOutQuad(t, b, c, d);
                 
-                case Ease.EaseInCubic:
+                case Ease.InCubic:
                     return EaseOutCubic(t, b, c, d);
                 
-                case Ease.EaseInQuart:
+                case Ease.InQuart:
                     return EaseInQuart(t, b, c, d);
                 
-                case Ease.EaseOutCubic:
+                case Ease.OutCubic:
                     return EaseOutCubic(t, b, c, d);
                 
-                case Ease.EaseOutQuart:
+                case Ease.OutQuart:
                     return EaseOutQuart(t, b, c, d);
                 
                 case Ease.InOutQuad:
                     return EaseInOutQuad(t, b, c, d);
                 
-                case Ease.EaseInOutCubic:
+                case Ease.InOutCubic:
                     return EaseInOutCubic(t, b, c, d);
                 
-                case Ease.EaseInOutQuart:
+                case Ease.InOutQuart:
                     return EaseInOutQuart(t, b, c, d);
                 
                 default:
@@ -55,8 +55,10 @@
             }
         }
         
-        // t = Current time b = start value
-        // c = change in value d = duration
+        // t = Current time
+        // b = start value
+        // c = change in value
+        // d = duration
         private static float LinearEasing(float t, float b, float c, float d) =>  c*t/d + b ;
         
         private static float EaseInQuad(float t, float b, float c, float d)

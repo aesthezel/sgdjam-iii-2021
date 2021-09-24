@@ -30,6 +30,12 @@ namespace Code.Camera
         {
             return StartCoroutine(ShakeCoroutine(strength, duration));
         }
+
+        public Coroutine DoLookAhead(float value, int direction, float sustainTime, float moveDuration)
+        {
+            return StartCoroutine(LookAheadCoroutine(value, direction, sustainTime, moveDuration));
+        }
+        
         
         //----------------------
         // COROUTINES - EFFECTS
@@ -60,6 +66,65 @@ namespace Code.Camera
                 _impulseSource.GenerateImpulse(strength);
                 yield return new WaitForEndOfFrame();
             }
+        }
+        
+        private IEnumerator LookAheadCoroutine(float value, int direction, float sustainTime, float moveDuration)
+        {
+            float dir = Mathf.Sign(direction);
+            var elapsedTime = 0f;
+            var initLocalPos = _cCam.m_Follow.localPosition;
+            
+            // Move to target pos
+            while (elapsedTime < moveDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                
+                // Compute the new position on each frame
+                var newPos = _cCam.m_Follow.localPosition;
+                var x = Easing.MakeEase(
+                    Ease.OutQuad, 
+                    elapsedTime, 
+                    initLocalPos.x, 
+                    value * dir, 
+                    moveDuration);
+                newPos.x = x;
+                
+                // Update target object position
+                _cCam.m_Follow.localPosition = newPos;
+                yield return new WaitForEndOfFrame();
+            }
+            
+            // Set the exact final value
+            _cCam.m_Follow.localPosition = initLocalPos + (Vector3.right * value * dir);
+            
+            // Wait for dash (or anything) to finish
+            yield return new WaitForSeconds(sustainTime);
+            
+            // Reset to normal value
+            elapsedTime = 0;
+            var lastPos = _cCam.m_Follow.localPosition;
+            
+            while (elapsedTime < moveDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                
+                // Compute the new position on each frame
+                var newPos = _cCam.m_Follow.localPosition;
+                
+                var x = Easing.MakeEase(
+                    Ease.InQuad, 
+                    elapsedTime,
+                    lastPos.x,
+                    -value * dir, 
+                    moveDuration);
+                newPos.x = x;
+                
+                // Update target object position
+                _cCam.m_Follow.localPosition = newPos;
+                yield return new WaitForEndOfFrame();
+            }
+            // Set the exact final value
+            _cCam.m_Follow.localPosition = initLocalPos;
         }
     }
 }
