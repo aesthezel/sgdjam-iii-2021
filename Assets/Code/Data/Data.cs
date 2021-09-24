@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 namespace Code.Data
 {
@@ -18,11 +17,13 @@ namespace Code.Data
             get => value;
             set
             {
-                OnValueChange?.Invoke();
                 this.value = value;
+                OnValueChange?.Invoke();
             }
         }
 
         public T StartValue => startValue;
+        
+        public void ResetValue() => value = startValue;
     }
 }

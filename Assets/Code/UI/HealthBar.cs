@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Code.Data;
 using Code.Hero;
 using UnityEngine;
@@ -9,29 +10,33 @@ namespace Code.UI
     {
         [SerializeField] private GameObject _healthIconPrefab;
         [SerializeField] private IntData _playerLifes;
-        private GameObject[] instantiatedGO;
+        private GameObject[] _instantiatedGO;
+
+        private void Awake()
+        {
+            InstancePlayerHealthOnUI();
+        }
 
         private void Start()
         {
-            InstancePlayerHealthOnUI();
             _playerLifes.OnValueChange += OnPlayerReceiveDamage;
         }
 
         private void InstancePlayerHealthOnUI()
         {
-            instantiatedGO = new GameObject[_playerLifes.Value];
+            _instantiatedGO = new GameObject[_playerLifes.Value];
             
-            for (int i = 0; i < _playerLifes.Value; i++)
+            for (var i = 0; i < _playerLifes.Value; i++)
             {
-                instantiatedGO[i] = Instantiate(_healthIconPrefab, gameObject.transform);
+                _instantiatedGO[i] = Instantiate(_healthIconPrefab, gameObject.transform);
             }
         }
         
         private void OnPlayerReceiveDamage()
         {
-            for (int i = 0; i < instantiatedGO.Length; i++)
-            { 
-                instantiatedGO[i].SetActive(i < _playerLifes.Value);
+            for (var i = 0; i < _instantiatedGO.Length; i++)
+            {
+                _instantiatedGO[i].SetActive(i < _playerLifes.Value);
             }
         }
     }

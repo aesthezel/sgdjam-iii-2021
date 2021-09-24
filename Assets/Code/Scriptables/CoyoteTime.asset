@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee2110d9e9fb4b90b0214ad6503f0a22, type: 3}
-  m_Name: PlayerLifes
+  m_Script: {fileID: 11500000, guid: f5aa338e67e0406880b45791dfd76b8a, type: 3}
+  m_Name: CoyoteTime
   m_EditorClassIdentifier: 
-  _startValue: 12
+  value: 0
+  startValue: 0.15

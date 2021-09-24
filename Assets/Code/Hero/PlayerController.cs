@@ -9,13 +9,15 @@ namespace Code.Hero
     public class PlayerController : MonoBehaviour
     {
         [Header("--- Player Stats ---")]
-        [SerializeField] private float _speed;
+        [SerializeField] private FloatData _speed;
         [SerializeField] private IntData lifes;
+
         [Header("-- Jumping --")]
         [SerializeField] private LayerMask whatIsGround;
+        [SerializeField] private FloatData coyoteTimeValue;
         [Space]
         [SerializeField] private Transform[] groundCheckers;
-        
+
         [Header("-- Looking --")] 
         [SerializeField] private Transform bodyPart;
         
@@ -47,7 +49,7 @@ namespace Code.Hero
 
                 // From ground to air
                 else if (_isGrounded && !value && !_coyoteCheck && !_jumping)
-                    StartCoroutine(CoyoteTime(0.2f));
+                    StartCoroutine(CoyoteTime(coyoteTimeValue.Value));
                 
                 _isGrounded = value;
             }
@@ -69,6 +71,13 @@ namespace Code.Hero
                 _facingRight = value;
             }
         }
+
+        public Vector3 LastFullyOnGround
+        {
+            get;
+            private set;
+        }
+        
         
         //----------------
         // UNITY METHODS
@@ -145,8 +154,8 @@ namespace Code.Hero
         private void Move()
         {
             HorizontalDirection = ((_playerOneMovement + _playerTwoMovement) / 2f).x;
-            transform.Translate(Vector2.right * (HorizontalDirection * _speed * Time.deltaTime));
-            //_myRigidBody.velocity += Vector2.right * (HorizontalDirection * _speed * Time.deltaTime);
+            transform.Translate(Vector2.right * (HorizontalDirection * _speed.Value * Time.deltaTime));
+            //_myRigidBody.velocity += Vector2.right * (HorizontalDirection * _speed.Value * Time.deltaTime);
         }
 
         //---------
@@ -204,9 +213,13 @@ namespace Code.Hero
             var direction = _facingRight ? 1 : -1;
             transform.DOMoveX(transform.position.x + (movDistance * direction), 0.5f).SetEase(Ease.OutQuad);
         }
-        
-        
+
         //----------------
+        // CHECKPOINT
+        //----------------
+        public void BackToCheckpoint() => transform.position = LastFullyOnGround;
+
+            //----------------
         // GROUND CHECK
         //----------------
         private bool CheckGrounded()
@@ -218,6 +231,10 @@ namespace Code.Hero
                 if (Physics2D.Raycast(checker.position, Vector2.down, 0.2f, whatIsGround))
                     checkers++;
             }
+            
+            // For the CheckpointCheck
+            if (checkers == groundCheckers.Length)
+                LastFullyOnGround = transform.position;
 
             return checkers > 0;
         }
