@@ -14,6 +14,7 @@ namespace Code.Hero
 
         [Header("-- Jumping --")]
         [SerializeField] private LayerMask whatIsGround;
+        [SerializeField] private LayerMask whatIsNotCheckpoint;
         [SerializeField] private FloatData coyoteTimeValue;
         [Space]
         [SerializeField] private Transform[] groundCheckers;
@@ -219,6 +220,19 @@ namespace Code.Hero
         //----------------
         public void BackToCheckpoint() => transform.position = LastFullyOnGround;
 
+        private void UpdateCheckpointPos()
+        {
+            var checkers = 0;
+            foreach (var checker in groundCheckers)
+            {
+                if (Physics2D.Raycast(checker.position, Vector2.down, 0.2f, whatIsNotCheckpoint))
+                    checkers++;
+            }
+            
+            if(checkers < groundCheckers.Length)
+                LastFullyOnGround = transform.position;
+        }
+        
             //----------------
         // GROUND CHECK
         //----------------
@@ -234,7 +248,7 @@ namespace Code.Hero
             
             // For the CheckpointCheck
             if (checkers == groundCheckers.Length)
-                LastFullyOnGround = transform.position;
+                UpdateCheckpointPos();
 
             return checkers > 0;
         }
