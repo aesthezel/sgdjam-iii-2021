@@ -33,6 +33,8 @@ namespace Code.Hero
         [SerializeField] private FloatData dashDistance;
         [TitleGroup("--- Skill Configs ---/Dash")]
         [SerializeField] private FloatData dashSuccessMaxTime;
+        [TitleGroup("--- Skill Configs ---/Dash")]
+        [SerializeField] private Collider2D hitChecker;
         
         [TitleGroup("--- Skill Configs ---/Jumping")]
         [SerializeField] private FloatData coyoteTimeValue;
@@ -250,8 +252,13 @@ namespace Code.Hero
 
             if (!_isGrounded)
                 _canDash = false;
-            
-            _myRigidBody.DOMove(destiny, dashTime.Value).SetEase(Ease.OutFlash).onComplete += () => CanMove = true;
+
+            hitChecker.enabled = false;
+            _myRigidBody.DOMove(destiny, dashTime.Value).SetEase(Ease.OutFlash).onComplete += () =>
+            {
+                hitChecker.enabled = true;
+                CanMove = true;
+            };
         }
 
         private bool DashChecker(float t) => _canDash;
@@ -321,7 +328,8 @@ namespace Code.Hero
         }
         
         private void ResetCoyoteTime() => _coyoteCheck = false;
-
+        
+        
         // GIZMOS...
         private void OnDrawGizmos()
         {
@@ -331,6 +339,9 @@ namespace Code.Hero
                 
                 Gizmos.DrawLine(position, position + Vector3.down * 0.2f);
             }
+
+            Gizmos.color = new Color(0.4f, 0.84f, 1f, 0.33f);
+            Gizmos.DrawSphere(transform.position, 3);
         }
     }
 }
