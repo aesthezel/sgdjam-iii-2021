@@ -80,8 +80,7 @@ namespace Code.Hero
             get;
             private set;
         }
-        
-        
+
         //----------------
         // UNITY METHODS
         //----------------
@@ -146,12 +145,12 @@ namespace Code.Hero
         //-----------
         // MOVEMENT
         //-----------
-        private void UpdateMovement(int mindId, Vector2 velocity)
+        private void UpdateMovement(int mindId, Vector2 inputVector)
         {
             if (mindId == 0)
-                _playerOneMovement = velocity;
+                _playerOneMovement = inputVector;
             else if (mindId == 1)
-                _playerTwoMovement = velocity;
+                _playerTwoMovement = inputVector;
         }
 
         private void Move()
@@ -214,7 +213,8 @@ namespace Code.Hero
             //TODO: Cuidado (1 - ...) asume que el valor de espera a player 2 sera de 1 segundo
             var movDistance = (1 - elapsedTIme) * 3f;
             var direction = _facingRight ? 1 : -1;
-            transform.DOMoveX(transform.position.x + (movDistance * direction), 0.5f).SetEase(Ease.OutQuad);
+            _myRigidBody.AddForce(Vector2.right * (_facingRight? 1: -1) * 10, ForceMode2D.Impulse);
+            //transform.DOMoveX(transform.position.x + (movDistance * direction), 0.5f).SetEase(Ease.OutQuad);
         }
 
         //----------------
