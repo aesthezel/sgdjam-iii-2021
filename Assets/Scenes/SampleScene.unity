@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthIconPrefab: {fileID: 515625458028032312, guid: 11e2f9b8a3abe6645a51e1557c78ab74, type: 3}
-  _playerReceiver: {fileID: 930503548}
+  _playerLifes: {fileID: 0}
 --- !u!114 &292839748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,8 +433,8 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
-  m_Spacing: -30
-  m_ChildForceExpandWidth: 1
+  m_Spacing: 30
+  m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
@@ -872,7 +872,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapper: {fileID: 930503547}
-  cCam: {fileID: 599127117}
 --- !u!114 &724747013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1250,7 +1249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  lifes: 5
+  lifes: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8

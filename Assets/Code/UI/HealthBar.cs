@@ -1,4 +1,6 @@
-﻿using Code.Hero;
+﻿using System.Collections.Generic;
+using Code.Data;
+using Code.Hero;
 using UnityEngine;
 
 namespace Code.UI
@@ -6,22 +8,31 @@ namespace Code.UI
     public class HealthBar : MonoBehaviour
     {
         [SerializeField] private GameObject _healthIconPrefab;
-        [SerializeField] private PlayerController _playerReceiver;
+        [SerializeField] private IntData _playerLifes;
+        private GameObject[] instantiatedGO;
 
         private void Start()
         {
             InstancePlayerHealthOnUI();
+            _playerLifes.OnValueChange += OnPlayerReceiveDamage;
         }
 
         private void InstancePlayerHealthOnUI()
         {
-            for (int i = 0; i < _playerReceiver.Lifes; i++)
+            instantiatedGO = new GameObject[_playerLifes.Value];
+            
+            for (int i = 0; i < _playerLifes.Value; i++)
             {
-                Instantiate(_healthIconPrefab, gameObject.transform);
+                instantiatedGO[i] = Instantiate(_healthIconPrefab, gameObject.transform);
             }
         }
         
-        // TODO: recibir un evento de PlayerReceiver cuando pierda o gane vida, y asi decida si instanciar otro Prefab o eliminar uno del Parent
-        // TODO: tambien podria hacerse un mini Pool System que apague y encienda
+        private void OnPlayerReceiveDamage()
+        {
+            for (int i = 0; i < instantiatedGO.Length; i++)
+            { 
+                instantiatedGO[i].SetActive(i < _playerLifes.Value);
+            }
+        }
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections;
-using System.Text;
-using System.Threading;
+using Code.Data;
 using UnityEngine;
 using UnityEngine.Assertions;
 using DG.Tweening;
@@ -11,8 +10,7 @@ namespace Code.Hero
     {
         [Header("--- Player Stats ---")]
         [SerializeField] private float _speed;
-        [SerializeField] private int lifes;
-        
+        [SerializeField] private IntData lifes;
         [Header("-- Jumping --")]
         [SerializeField] private LayerMask whatIsGround;
         [Space]
@@ -56,7 +54,7 @@ namespace Code.Hero
         }
         
         public float HorizontalDirection { get; private set; }
-        public int Lifes => lifes;
+        public IntData Lifes => lifes;
 
         
         private bool _facingRight;
