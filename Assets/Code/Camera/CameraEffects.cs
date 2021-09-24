@@ -31,9 +31,9 @@ namespace Code.Camera
             return StartCoroutine(ShakeCoroutine(strength, duration));
         }
 
-        public Coroutine DoLookAhead(float value, int direction, float sustainTime, float moveDuration)
+        public Coroutine DoLookAhead(float value, int direction, float sustainTime, float inDuration, float outDuration)
         {
-            return StartCoroutine(LookAheadCoroutine(value, direction, sustainTime, moveDuration));
+            return StartCoroutine(LookAheadCoroutine(value, direction, sustainTime, inDuration, outDuration));
         }
         
         
@@ -68,14 +68,14 @@ namespace Code.Camera
             }
         }
         
-        private IEnumerator LookAheadCoroutine(float value, int direction, float sustainTime, float moveDuration)
+        private IEnumerator LookAheadCoroutine(float value, int direction, float sustainTime, float inDuration, float outDuration)
         {
-            float dir = Mathf.Sign(direction);
+            var dir = Mathf.Sign(direction);
             var elapsedTime = 0f;
             var initLocalPos = _cCam.m_Follow.localPosition;
             
             // Move to target pos
-            while (elapsedTime < moveDuration)
+            while (elapsedTime < inDuration)
             {
                 elapsedTime += Time.deltaTime;
                 
@@ -86,7 +86,7 @@ namespace Code.Camera
                     elapsedTime, 
                     initLocalPos.x, 
                     value * dir, 
-                    moveDuration);
+                    inDuration);
                 newPos.x = x;
                 
                 // Update target object position
@@ -104,7 +104,7 @@ namespace Code.Camera
             elapsedTime = 0;
             var lastPos = _cCam.m_Follow.localPosition;
             
-            while (elapsedTime < moveDuration)
+            while (elapsedTime < outDuration)
             {
                 elapsedTime += Time.deltaTime;
                 
@@ -112,11 +112,11 @@ namespace Code.Camera
                 var newPos = _cCam.m_Follow.localPosition;
                 
                 var x = Easing.MakeEase(
-                    Ease.InQuad, 
+                    Ease.OutQuad, 
                     elapsedTime,
                     lastPos.x,
                     -value * dir, 
-                    moveDuration);
+                    outDuration);
                 newPos.x = x;
                 
                 // Update target object position
