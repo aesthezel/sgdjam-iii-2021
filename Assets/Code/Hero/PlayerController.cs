@@ -1,34 +1,55 @@
-using System;
 using System.Collections;
 using Code.Data;
-using Code.Utils.Events;
 using UnityEngine;
 using UnityEngine.Assertions;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 
 namespace Code.Hero
 {
+    [RequireComponent(typeof(InputMapper))]
     public class PlayerController : MonoBehaviour
     {
-        [Header("--- Player Stats ---")]
+        [BoxGroup("--- Player Stats ---")]
         [SerializeField] private FloatData _speed;
+        [BoxGroup("--- Player Stats ---")]
         [SerializeField] private IntData lifes;
 
-        [Header("-- Jumping --")]
+        [BoxGroup("-- Ground Check --")]
         [SerializeField] private LayerMask whatIsGround;
+        [BoxGroup("-- Ground Check --")]
         [SerializeField] private LayerMask whatIsNotCheckpoint;
-        [SerializeField] private FloatData coyoteTimeValue;
-        [Space]
+        [BoxGroup("-- Ground Check --")]
         [SerializeField] private Transform[] groundCheckers;
 
-        [Header("-- Looking --")] 
+        [BoxGroup("-- Looking --")]
         [SerializeField] private Transform bodyPart;
 
+        [BoxGroup("--- Skill Configs ---")]
+        
+        [TitleGroup("--- Skill Configs ---/Dash")]
+        [SerializeField] private FloatData dashTime;
+        [TitleGroup("--- Skill Configs ---/Dash")]
+        [SerializeField] private FloatData dashDistance;
+        [TitleGroup("--- Skill Configs ---/Dash")]
+        [SerializeField] private FloatData dashSuccessMaxTime;
+        
+        [TitleGroup("--- Skill Configs ---/Jumping")]
+        [SerializeField] private FloatData coyoteTimeValue;
+        [TitleGroup("--- Skill Configs ---/Jumping")]
+        [SerializeField] private FloatData gravityModifier;
+        [TitleGroup("--- Skill Configs ---/Jumping")]
+        [SerializeField] private FloatData jumpForceAlone;
+        [TitleGroup("--- Skill Configs ---/Jumping")]
+        [SerializeField] private FloatData jumpForceCombined;
         
         // Components
         private Rigidbody2D _myRigidBody;
         private InputMapper _mapper;
-
+        
+        // Checkpoint
+        private Vector3 _lastFullyOnGround;
+        
         // Jumping
         private bool _coyoteCheck;
         private bool _isGrounded;
@@ -41,6 +62,12 @@ namespace Code.Hero
         // Movement
         private Vector2 _playerOneMovement;
         private Vector2 _playerTwoMovement;
+        
+        // dash
+        private bool _canDash;
+        
+        // facing
+        private bool _facingRight = true;
         
         public bool IsGrounded
         {
@@ -58,11 +85,8 @@ namespace Code.Hero
                 _isGrounded = value;
             }
         }
-        
         public float HorizontalDirection { get; private set; }
         public IntData Lifes => lifes;
-
-        private bool _facingRight;
         public bool FacingRight
         {
             get => _facingRight;
@@ -74,12 +98,9 @@ namespace Code.Hero
                 _facingRight = value;
             }
         }
-
-        public Vector3 LastFullyOnGround
-        {
-            get;
-            private set;
-        }
+        
+        // TODO: public controls enabled would be better
+        public bool CanMove { get; set; } = true;
 
         //----------------
         // UNITY METHODS
@@ -104,18 +125,22 @@ namespace Code.Hero
 
         private void FixedUpdate()
         {
-            Move();
+            if(CanMove)
+                Move();
 
             if (!_isGrounded)
             {
-                _airTime += Time.fixedDeltaTime;
+                _airTime += Time.deltaTime * gravityModifier.Value;
                 _myRigidBody.velocity += Vector2.down * _airTime;
             }
         }
         
         private void LateUpdate()
         {
-            FacingRight = !(HorizontalDirection < -0.1f);
+            if (HorizontalDirection < -0.1f)
+                FacingRight = false;
+            else if(HorizontalDirection > 0.1f)
+                FacingRight = true;
         }
 
         //---------------------------------
@@ -136,6 +161,7 @@ namespace Code.Hero
             var bDashAction = _mapper.ActionMapper.TryGetValue("Dash", out var dashEvents);
             Assert.IsTrue(bDashAction, "Dash input action not found in $InputMapper");
 
+            dashEvents.checker += DashChecker;
             dashEvents.ok += Dash;
         }
 
@@ -157,7 +183,6 @@ namespace Code.Hero
         {
             HorizontalDirection = ((_playerOneMovement + _playerTwoMovement) / 2f).x;
             transform.Translate(Vector2.right * (HorizontalDirection * _speed.Value * Time.deltaTime));
-            //_myRigidBody.velocity += Vector2.right * (HorizontalDirection * _speed.Value * Time.deltaTime);
         }
 
         //---------
@@ -178,7 +203,7 @@ namespace Code.Hero
                     ResetCoyoteTime();
 
                 _myRigidBody.velocity = new Vector2(_myRigidBody.velocity.x, 0);
-                _myRigidBody.AddForce(Vector2.up * 7, ForceMode2D.Impulse);
+                _myRigidBody.AddForce(Vector2.up * jumpForceAlone.Value, ForceMode2D.Impulse);
             }
             
             return canJump;
@@ -187,8 +212,9 @@ namespace Code.Hero
         private void PerformSuperJump(float elapsedTime)
         {
             _jumpCompleted = true;
+            _airTime = 0;
             _myRigidBody.velocity = new Vector2(_myRigidBody.velocity.x, 0);
-            _myRigidBody.AddForce(Vector2.up * 7, ForceMode2D.Impulse);
+            _myRigidBody.AddForce(Vector2.up * jumpForceCombined.Value, ForceMode2D.Impulse);
         }
 
         private void CheckForDoubleJump() => _canDoubleJump = (!IsGrounded && _jumpCompleted);
@@ -197,12 +223,13 @@ namespace Code.Hero
         {
             if (_jumping && !_jumpCompleted)
                 _mapper.ActionMapper["Jump"].finished?.Invoke();
-            
+
             _airTime = 0;
             _jumping = false;
             _jumpCompleted = false;
             _canDoubleJump = false;
             _jumpCount = 0;
+            _canDash = true;
         }
     
         //---------
@@ -210,17 +237,29 @@ namespace Code.Hero
         //---------
         private void Dash(float elapsedTIme)
         {
-            //TODO: Cuidado (1 - ...) asume que el valor de espera a player 2 sera de 1 segundo
-            var movDistance = (1 - elapsedTIme) * 3f;
+            var dd = dashDistance.Value;
+            var movDistance = elapsedTIme< dashSuccessMaxTime.Value ? dd : (1 - elapsedTIme) * dd;
             var direction = _facingRight ? 1 : -1;
-            _myRigidBody.AddForce(Vector2.right * (_facingRight? 1: -1) * 10, ForceMode2D.Impulse);
-            //transform.DOMoveX(transform.position.x + (movDistance * direction), 0.5f).SetEase(Ease.OutQuad);
+            var destiny = transform.position + (Vector3.right * movDistance * direction);
+            
+            CanMove = false;
+            _airTime = 0;
+            
+            // Si queremos que no se puedan encadenar dash y saltos descomentar esto
+            //_jumpCount++;
+
+            if (!_isGrounded)
+                _canDash = false;
+            
+            _myRigidBody.DOMove(destiny, dashTime.Value).SetEase(Ease.OutFlash).onComplete += () => CanMove = true;
         }
 
+        private bool DashChecker(float t) => _canDash;
+        
         //----------------
         // CHECKPOINT
         //----------------
-        public void BackToCheckpoint() => transform.position = LastFullyOnGround;
+        public void BackToCheckpoint() => transform.position = _lastFullyOnGround;
 
         private void UpdateCheckpointPos()
         {
@@ -232,7 +271,7 @@ namespace Code.Hero
             }
             
             if(checkers < groundCheckers.Length)
-                LastFullyOnGround = transform.position;
+                _lastFullyOnGround = transform.position;
         }
         
         //----------------
