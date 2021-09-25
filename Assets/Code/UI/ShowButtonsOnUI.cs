@@ -1,25 +1,32 @@
-﻿using Code.Hero;
+﻿using System;
+using System.Collections;
+using System.Linq;
+using Code.Hero;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Code.UI
 {
-    public class ShowButtonsOnUI: MonoBehaviour
+    public class ShowButtonsOnUI : MonoBehaviour
     {
         [SerializeField] private InputSpritesUI sprites;
-        [SerializeField] private Image uiImage;
-        [SerializeField] private InputMapper mapper;
+        [SerializeField] private Image[] images;
+        private Coroutine _delayCoroutine;
         
-        private void Start()
+        public void ChangeImage(int mind, string actionName)
         {
-            foreach (var input in sprites.InputUIImages)
-            {
-                var action = mapper.ActionMapper[input.inputName];
-                action.start += f => ChangeImage(input.uiButtom);
-                action.finished += ( ) => ChangeImage(null);
-            }
+            images[mind].sprite = sprites.GetByName(actionName);
+            
+            if(_delayCoroutine != null)
+                StopCoroutine(_delayCoroutine);
+            
+            _delayCoroutine = StartCoroutine(SpriteBackToNull(images[mind]));
         }
 
-        private void ChangeImage(Sprite sprite) => uiImage.sprite = sprite;
+        private IEnumerator SpriteBackToNull(Image image)
+        {
+            yield return new WaitForSeconds(1f);
+            image.sprite = null;
+        }
     }
 }

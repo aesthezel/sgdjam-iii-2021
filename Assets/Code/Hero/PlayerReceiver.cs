@@ -6,6 +6,7 @@ using UnityEngine.Assertions;
 
 namespace Code.Hero
 {
+    // TODO: Posible IService para un futuro
     [RequireComponent(typeof(InputMapper))]
     public class PlayerReceiver : MonoBehaviour
     {
@@ -14,10 +15,23 @@ namespace Code.Hero
         private Coroutine _waitingCoroutine;
         private float _timeUntilComplete;
         private int _firstMindId = -1;
-
+        private int _lastMindId;
+        
+        public Action<int, string> MindIdChange;
+        
+        public int LastMindId
+        {
+            get => _lastMindId;
+            set
+            {
+                MindIdChange?.Invoke(value, _requiredActionToComplete);
+                _lastMindId = value;
+            }
+        }
+        
         // Input Mapper
         private InputMapper _mapper;
-        
+
         // --------------
         // UNITY METHODS
         // --------------
@@ -51,6 +65,8 @@ namespace Code.Hero
 
         public void InputActionPerformed(int mindId, string actionName)
         {
+            LastMindId = mindId;
+            
             if (string.IsNullOrEmpty(_requiredActionToComplete))
                 InputEventStart(mindId, actionName, 1f);
             

@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Code.UI;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,22 +8,26 @@ namespace Code.Hero
 {
     public class Mind : MonoBehaviour
     {
-        [SerializeField] PlayerReceiver _playerReceiver;
-        
+        [SerializeField] private PlayerInput playerInput;
+        private PlayerReceiver _playerReceiver;
         private Rigidbody2D _rigidbody2D;
-
+        private ShowButtonsOnUI buttonController;
+        
         [ReadOnly] private int _inputIndex;
+        
         public int InputIndex
         {
             get => _inputIndex;
         }
         
-        [SerializeField] private PlayerInput _playerInput;
+        
 
         private void Awake()
         {
+            // TODO: In a future we could stop using FindWithTag with a Service Locator
             _playerReceiver = GameObject.FindWithTag("Player").GetComponent<PlayerReceiver>();
-            _inputIndex = _playerInput.playerIndex;
+            buttonController = GameObject.FindWithTag("ButtonChangeUI").GetComponent<ShowButtonsOnUI>();
+            _inputIndex = playerInput.playerIndex;
         }
 
         public void MovementInput(InputAction.CallbackContext context)
@@ -33,10 +38,11 @@ namespace Code.Hero
 
         public void PerformInput(InputAction.CallbackContext context)
         {
-            if(_playerReceiver == null) return;
-            
-            if (context.performed)
-                _playerReceiver.InputActionPerformed(_inputIndex, context.action.name);
+            if(_playerReceiver == null || !context.performed) return;
+
+            var actionName = context.action.name;
+            _playerReceiver.InputActionPerformed(_inputIndex, actionName);
+            buttonController.ChangeImage(_inputIndex, actionName);
         }
     }
 }
