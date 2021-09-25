@@ -20,7 +20,7 @@ namespace Code.Hero
         private GameInput _master;
 
         // Dictionary containing the input names and events
-        public Dictionary<string, ActionSet> ActionMapper { get; } = new Dictionary<string, ActionSet>();
+        public Dictionary<string, ActionSet> ActionMapper { get; private set; }
 
         private void Awake()
         {
