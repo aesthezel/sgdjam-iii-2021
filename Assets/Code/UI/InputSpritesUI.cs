@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Settings.Input;
+using UnityEditor;
 using UnityEngine;
 
 namespace Code.UI
@@ -27,5 +28,17 @@ namespace Code.UI
         [SerializeField] private List<InputWithSprite> inputUIImages;
 
         public List<InputWithSprite> InputUIImages => inputUIImages;
+
+        public Sprite GetByName(string name)
+        {
+            foreach (var inputUI in inputUIImages)
+            {
+                if (inputUI.inputName.Equals(name))
+                    return inputUI.uiButtom;
+            }
+
+            return null;
+        }
+
     }
 }

@@ -122,5 +122,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de724fa35a24c45bb1e6d8aa72c4be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerReceiver: {fileID: 0}
-  _playerInput: {fileID: 7055422805216842721}
+  playerInput: {fileID: 7055422805216842721}
