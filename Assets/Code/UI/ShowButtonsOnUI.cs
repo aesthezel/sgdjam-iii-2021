@@ -22,6 +22,23 @@ namespace Code.UI
             
             _delayCoroutine = StartCoroutine(SpriteBackToNull(images[mind]));
         }
+        
+        public void ChangeImageMovement(int mind, string actionName, Vector2 movement)
+        {
+            var name = "Stop";
+            
+            if (movement.x > 0.05f)
+                name = "Right";
+            else if(movement.x < -0.05f)
+                name = "Left";
+            
+            var image = sprites.GetByName(name);
+
+            if (name.Equals("Stop"))
+                image = null;
+
+            images[mind + 2].sprite = image;
+        }
 
         private IEnumerator SpriteBackToNull(Image image)
         {

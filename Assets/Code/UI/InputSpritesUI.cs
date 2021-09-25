@@ -18,7 +18,11 @@ namespace Code.UI
         private List<string> GetInputNames()
         {
             var input = (new GameInput()).asset.actionMaps[0].actions;
-            return input.Select(action => action.name).ToList();
+            var names = input.Select(action => action.name).ToList();
+            names.Add("Right");
+            names.Add("Left");
+            names.Add("Stop");
+            return names;
         }
     }
     
