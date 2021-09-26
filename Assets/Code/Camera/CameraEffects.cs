@@ -7,8 +7,6 @@ namespace Code.Camera
 {
     public class CameraEffects : MonoBehaviour
     {
-        [SerializeField] private InputMapper mapper;
-        
         private CinemachineVirtualCamera _cCam;
         private CinemachineImpulseSource _impulseSource;
         
