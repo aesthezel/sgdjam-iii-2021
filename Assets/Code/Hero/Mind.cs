@@ -32,8 +32,12 @@ namespace Code.Hero
 
         public void MovementInput(InputAction.CallbackContext context)
         {
-            if(_playerReceiver != null)
-                _playerReceiver.MovementInput(_inputIndex, context.ReadValue<Vector2>());
+            if (_playerReceiver != null)
+            {
+                var movement = context.ReadValue<Vector2>();
+                _playerReceiver.MovementInput(_inputIndex, movement);
+                buttonController.ChangeImageMovement(_inputIndex, context.action.name, movement);
+            }
         }
 
         public void PerformInput(InputAction.CallbackContext context)
