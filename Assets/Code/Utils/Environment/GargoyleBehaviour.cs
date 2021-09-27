@@ -44,7 +44,7 @@ namespace Code.Utils.Environment
                 go.transform.position = _shootPoint.position;
                 var dir = transform.right;
                 if (transform.localScale.x < 0) dir = transform.right; 
-                go.GetComponent<FireBall>().direction = transform.right * -1;
+                go.GetComponent<FireBall>().Direction = transform.right * -1;
                 yield return new WaitForSeconds(cooldown);
             }
         }
