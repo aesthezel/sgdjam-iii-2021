@@ -75569,6 +75569,14 @@ PrefabInstance:
       value: Movement
       objectReference: {fileID: 0}
     - target: {fileID: 5984014605863478908, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
+      propertyPath: runningAnimationVar
+      value: Running
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984014605863478908, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
+      propertyPath: groundedAnimationVar
+      value: Grounded
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984014605863478908, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
       propertyPath: movementAnimationVar
       value: Horizontal
       objectReference: {fileID: 0}

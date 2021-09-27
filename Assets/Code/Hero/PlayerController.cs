@@ -18,7 +18,7 @@ namespace Code.Hero
         [BoxGroup("--- Animator ---")] 
         [SerializeField] private Animator bodyAnimator;
         [BoxGroup("--- Animator ---")] 
-        [SerializeField] private string movementAnimationVar, runningAnimationVar, jumpAnimationVar, dashAnimationVar, hitAnimationVar;
+        [SerializeField] private string movementAnimationVar, runningAnimationVar, jumpAnimationVar, dashAnimationVar, hitAnimationVar, groundedAnimationVar;
 
         [BoxGroup("-- Ground Check --")]
         [SerializeField] private LayerMask whatIsGround;
@@ -197,7 +197,7 @@ namespace Code.Hero
             HorizontalDirection = ((_playerOneMovement + _playerTwoMovement) / 2f).x;
             
             bodyAnimator.SetFloat(movementAnimationVar, Mathf.Abs(HorizontalDirection));
-            bodyAnimator.SetBool(runningAnimationVar, Mathf.Abs(HorizontalDirection) < 0.5f ? false : true);
+            bodyAnimator.SetBool(runningAnimationVar, Mathf.Abs(HorizontalDirection) > 0.5f ? true : false);
             
 
             transform.Translate(Vector2.right * (HorizontalDirection * speed.Value * Time.deltaTime));
@@ -332,6 +332,7 @@ namespace Code.Hero
             if (checkers == groundCheckers.Length)
                 UpdateCheckpointPos();
 
+            bodyAnimator.SetBool(groundedAnimationVar, checkers > 0);
             return checkers > 0;
         }
 
