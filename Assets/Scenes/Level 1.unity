@@ -74018,6 +74018,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 634227861589665736, guid: 135201b020ee07942b09fd3d0b9c91a5, type: 3}
   m_PrefabInstance: {fileID: 709309886}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1317260233 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8122821204058826428, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
+  m_PrefabInstance: {fileID: 1523889371}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1324248316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75530,6 +75535,42 @@ PrefabInstance:
     - target: {fileID: 5984014605863478906, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984014605863478908, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
+      propertyPath: hitVariable
+      value: Hit
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984014605863478908, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
+      propertyPath: bodyAnimator
+      value: 
+      objectReference: {fileID: 1317260233}
+    - target: {fileID: 5984014605863478908, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
+      propertyPath: dashVariable
+      value: Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984014605863478908, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
+      propertyPath: jumpVariable
+      value: Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984014605863478908, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
+      propertyPath: hitAnimationVar
+      value: Hits
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984014605863478908, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
+      propertyPath: dashAnimationVar
+      value: Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984014605863478908, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
+      propertyPath: jumpAnimationVar
+      value: Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984014605863478908, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
+      propertyPath: movementVariable
+      value: Movement
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984014605863478908, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
+      propertyPath: movementAnimationVar
+      value: Horizontal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}

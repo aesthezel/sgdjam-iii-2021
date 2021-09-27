@@ -7,7 +7,7 @@ namespace Code.Utils.Environment
     public class FireBall : MonoBehaviour
     {
         public Vector2 Direction { get; set; } = Vector2.right;
-        public float speed = 2.5f;
+        public float speed = 150f;
 
         private Rigidbody2D _rigidbody2D;
 
@@ -23,7 +23,7 @@ namespace Code.Utils.Environment
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

@@ -15,6 +15,11 @@ namespace Code.Hero
         [BoxGroup("--- Player Stats ---")]
         [SerializeField] private IntData lifes;
 
+        [BoxGroup("--- Animator ---")] 
+        [SerializeField] private Animator bodyAnimator;
+        [BoxGroup("--- Animator ---")] 
+        [SerializeField] private string movementAnimationVar, runningAnimationVar, jumpAnimationVar, dashAnimationVar, hitAnimationVar;
+
         [BoxGroup("-- Ground Check --")]
         [SerializeField] private LayerMask whatIsGround;
         [BoxGroup("-- Ground Check --")]
@@ -190,6 +195,11 @@ namespace Code.Hero
         private void Move()
         {
             HorizontalDirection = ((_playerOneMovement + _playerTwoMovement) / 2f).x;
+            
+            bodyAnimator.SetFloat(movementAnimationVar, Mathf.Abs(HorizontalDirection));
+            bodyAnimator.SetBool(runningAnimationVar, Mathf.Abs(HorizontalDirection) < 0.5f ? false : true);
+            
+
             transform.Translate(Vector2.right * (HorizontalDirection * speed.Value * Time.deltaTime));
         }
 
@@ -207,13 +217,15 @@ namespace Code.Hero
                 _jumpCompleted = false;
                 _jumpCount++;
                 
+                bodyAnimator.SetTrigger(jumpAnimationVar);
+                
                 if(_coyoteCheck)
                     ResetCoyoteTime();
 
                 _myRigidBody.velocity = new Vector2(_myRigidBody.velocity.x, 0);
                 _myRigidBody.AddForce(Vector2.up * jumpForceAlone.Value, ForceMode2D.Impulse);
             }
-            
+
             return canJump;
         }
 
@@ -250,6 +262,8 @@ namespace Code.Hero
             var direction = _facingRight ? 1 : -1;
             var destiny = transform.position + (Vector3.right * movDistance * direction);
             
+            bodyAnimator.SetTrigger(dashAnimationVar);
+            
             CanMove = false;
             _airTime = 0;
             
@@ -265,6 +279,8 @@ namespace Code.Hero
                 hitChecker.enabled = true;
                 CanMove = true;
             };
+            
+            bodyAnimator.SetBool(dashAnimationVar, false);
         }
 
         private bool DashChecker(float t) => _canDash;
