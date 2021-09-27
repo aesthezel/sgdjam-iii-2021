@@ -20,6 +20,8 @@ namespace Code.Hero
         [BoxGroup("-- Ground Check --")]
         [SerializeField] private LayerMask whatIsNotCheckpoint;
         [BoxGroup("-- Ground Check --")]
+        [SerializeField] private LayerMask whatIsWall;
+        [BoxGroup("-- Ground Check --")]
         [SerializeField] private Transform[] groundCheckers;
 
         [BoxGroup("-- Looking --")]
@@ -124,6 +126,36 @@ namespace Code.Hero
         private void Update()
         {
             IsGrounded = CheckGrounded();
+            
+            // Evita que se quede enganchado en las paredes
+            var hit = Physics2D.Raycast(transform.position, bodyPart.right, 0.2f, whatIsWall);
+            if (hit.collider != null && _jumping)
+            {
+                if (_facingRight)
+                {
+                    if(_playerOneMovement.x > 0)
+                        _playerOneMovement.x = 0; 
+                    if(_playerTwoMovement.x > 0)
+                        _playerTwoMovement.x = 0;
+                }
+                else
+                {
+                    if(_playerOneMovement.x < 0)
+                        _playerOneMovement.x = 0; 
+                    if(_playerTwoMovement.x < 0)
+                        _playerTwoMovement.x = 0;
+                }
+            }
+            
+            if (!_isGrounded)
+            {
+                _airTime += Time.deltaTime * gravityModifier.Value;
+                _myRigidBody.velocity += Vector2.down * _airTime;
+            }
+            
+            // Velocidad en Y acotada
+            var velocity = _myRigidBody.velocity;
+            _myRigidBody.velocity = new Vector2(velocity.x, Mathf.Clamp(velocity.y, -10, 100));
         }
 
         private void FixedUpdate()
@@ -136,11 +168,6 @@ namespace Code.Hero
                 _playerTwoMovement = Vector2.zero;
             }
 
-            if (!_isGrounded)
-            {
-                _airTime += Time.deltaTime * gravityModifier.Value;
-                _myRigidBody.velocity += Vector2.down * _airTime;
-            }
         }
         
         private void LateUpdate()
@@ -347,6 +374,17 @@ namespace Code.Hero
         
         private void ResetCoyoteTime() => _coyoteCheck = false;
         
+        // UTILS
+        public void DisableInput(float time) => StartCoroutine(DisableInputCoroutine(time));
+        
+        private IEnumerator DisableInputCoroutine(float time)
+        {
+            _receiver.ControlsEnabled = false;
+            CanMove = false;
+            yield return new WaitForSeconds(time);
+            _receiver.ControlsEnabled = true;
+            CanMove = true;
+        }
         
         // GIZMOS...
         private void OnDrawGizmos()
@@ -357,9 +395,9 @@ namespace Code.Hero
                 
                 Gizmos.DrawLine(position, position + Vector3.down * 0.2f);
             }
-
-            Gizmos.color = new Color(0.4f, 0.84f, 1f, 0.33f);
-            Gizmos.DrawSphere(transform.position, 3);
+            Gizmos.DrawLine(transform.position, transform.position + bodyPart.right * 0.2f);
+            Gizmos.color = new Color(0.4f, 0.84f, 1f, 0.1f);
+            Gizmos.DrawSphere(transform.position, 1);
         }
     }
 }

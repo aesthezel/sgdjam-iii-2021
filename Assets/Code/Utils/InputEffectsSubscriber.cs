@@ -29,7 +29,7 @@ namespace Code.Utils
         [SerializeField] private FloatData endZoomOutTime;
 
         [TitleGroup("CAMERA EFFECTS/TIME DELAY")] [SerializeField]
-        private LayerMask DelayTriggerers;
+        private LayerMask delayTriggerers;
         
         private CameraEffects _effects;
         private PlayerController _controller;
@@ -51,9 +51,9 @@ namespace Code.Utils
             var done = _mapper.ActionMapper.TryGetValue("Jump", out var actions);
             Assert.IsTrue(done, "Error retrieving <Jump> input");
             
-            actions.start += TimeDelay;
+            //actions.start += TimeDelay;
             actions.start += f => _effects.DoOrtoSize(startTargetOrtoSize.Value, f/3, Camera.Ease.InQuad);
-            actions.finished += () => _effects.DoOrtoSize(normalOrtoSize.Value, endZoomOutTime.Value, Camera.Ease.OutQuad);
+            actions.finished += () => _effects.DoOrtoSize(startTargetOrtoSize.Value * -1, endZoomOutTime.Value, Camera.Ease.OutQuad);
         }
 
         private void DashEffects()
@@ -73,7 +73,7 @@ namespace Code.Utils
         // TODO: Mal Optimizado
         private void TimeDelay(float time)
         {
-            var objs = Physics2D.OverlapCircle(_controller.transform.position, 2, DelayTriggerers);
+            var objs = Physics2D.OverlapCircle(_controller.transform.position, 1, delayTriggerers);
             if (objs != null)
             {
                 StartCoroutine(ProgressiveDelay(time));
@@ -82,7 +82,7 @@ namespace Code.Utils
 
         private IEnumerator ProgressiveDelay(float time)
         {
-            Time.timeScale = 0.55f;
+            Time.timeScale = 0.7f;
             yield return new WaitForSeconds(time);
             Time.timeScale = 1f;
         }

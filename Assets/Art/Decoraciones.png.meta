@@ -50,6 +50,27 @@ TextureImporter:
   - first:
       213: -714337920119910767
     second: Decoraciones_15
+  - first:
+      213: -5280557591430360937
+    second: Decoraciones_16
+  - first:
+      213: -8052810386510529200
+    second: Decoraciones_17
+  - first:
+      213: -3523429973455237229
+    second: Decoraciones_18
+  - first:
+      213: 1059580517398341750
+    second: Decoraciones_19
+  - first:
+      213: -3020372040068094026
+    second: Decoraciones_20
+  - first:
+      213: 910331746102650947
+    second: Decoraciones_21
+  - first:
+      213: -5994571564614820178
+    second: Decoraciones_22
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -155,7 +176,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 31
-        y: 413
+        y: 831
         width: 35
         height: 63
       alignment: 0
@@ -176,7 +197,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 89
-        y: 414
+        y: 832
         width: 22
         height: 58
       alignment: 0
@@ -197,7 +218,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-        y: 414
+        y: 832
         width: 12
         height: 58
       alignment: 0
@@ -218,7 +239,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 125
-        y: 414
+        y: 832
         width: 12
         height: 58
       alignment: 0
@@ -239,7 +260,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 138
-        y: 413
+        y: 831
         width: 12
         height: 62
       alignment: 0
@@ -260,7 +281,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 173
-        y: 424
+        y: 842
         width: 41
         height: 35
       alignment: 0
@@ -281,7 +302,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 246
-        y: 415
+        y: 833
         width: 52
         height: 49
       alignment: 0
@@ -302,7 +323,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 312
-        y: 420
+        y: 838
         width: 14
         height: 30
       alignment: 0
@@ -323,7 +344,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 334
-        y: 420
+        y: 838
         width: 14
         height: 30
       alignment: 0
@@ -344,7 +365,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 361
-        y: 426
+        y: 844
         width: 111
         height: 20
       alignment: 0
@@ -365,7 +386,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 510
-        y: 420
+        y: 838
         width: 56
         height: 25
       alignment: 0
@@ -386,9 +407,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 6
-        y: 8
-        width: 483
-        height: 379
+        y: 443
+        width: 125
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -406,10 +427,10 @@ TextureImporter:
       name: Decoraciones_12
       rect:
         serializedVersion: 2
-        x: 527
-        y: 350
-        width: 31
-        height: 48
+        x: 364
+        y: 442
+        width: 125
+        height: 361
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -427,10 +448,10 @@ TextureImporter:
       name: Decoraciones_13
       rect:
         serializedVersion: 2
-        x: 535
-        y: 304
-        width: 29
-        height: 30
+        x: 527
+        y: 768
+        width: 31
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -448,10 +469,10 @@ TextureImporter:
       name: Decoraciones_14
       rect:
         serializedVersion: 2
-        x: 533
-        y: 240
-        width: 32
-        height: 43
+        x: 535
+        y: 722
+        width: 29
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -469,10 +490,10 @@ TextureImporter:
       name: Decoraciones_15
       rect:
         serializedVersion: 2
-        x: 525
-        y: 189
-        width: 24
-        height: 35
+        x: 161
+        y: 534
+        width: 171
+        height: 127
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -482,6 +503,132 @@ TextureImporter:
       bones: []
       spriteID: 19e49a542792616f0800000000000000
       internalID: -714337920119910767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Decoraciones_16
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 658
+        width: 32
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7901dc229d0b7b6b0800000000000000
+      internalID: -5280557591430360937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Decoraciones_17
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 607
+        width: 24
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05db67c7e9bae3090800000000000000
+      internalID: -8052810386510529200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Decoraciones_18
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 71
+        width: 60
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39f8c396b134a1fc0800000000000000
+      internalID: -3523429973455237229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Decoraciones_19
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 68
+        width: 83
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 678e37eddd264be00800000000000000
+      internalID: 1059580517398341750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Decoraciones_20
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 355
+        width: 37
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b72836d1ab7516d0800000000000000
+      internalID: -3020372040068094026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Decoraciones_21
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 355
+        width: 36
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 348a53266e522ac00800000000000000
+      internalID: 910331746102650947
       vertices: []
       indices: 
       edges: []

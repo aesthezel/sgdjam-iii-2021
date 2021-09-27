@@ -181,7 +181,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5984014605863478906}
-  - component: {fileID: 5984014605863478904}
   - component: {fileID: 5984014605863478903}
   - component: {fileID: 5984014605863478905}
   - component: {fileID: 5984014605863478907}
@@ -189,6 +188,7 @@ GameObject:
   - component: {fileID: 5984014605863478909}
   - component: {fileID: 5984014605863478910}
   - component: {fileID: 1948601661940498248}
+  - component: {fileID: 549916964}
   m_Layer: 8
   m_Name: Bicefalo
   m_TagString: Player
@@ -214,32 +214,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &5984014605863478904
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5984014605863478902}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.41, y: 3.2}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!50 &5984014605863478903
 Rigidbody2D:
   serializedVersion: 4
@@ -305,6 +279,9 @@ MonoBehaviour:
   whatIsNotCheckpoint:
     serializedVersion: 2
     m_Bits: 64
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 520
   groundCheckers:
   - {fileID: 5984014604685780583}
   - {fileID: 5984014604977550734}
@@ -351,9 +328,9 @@ MonoBehaviour:
   startTargetOrtoSize: {fileID: 11400000, guid: f9e264bc1c955904ca4fca87566f2d0e, type: 2}
   normalOrtoSize: {fileID: 11400000, guid: 957875291c18d424bb12a955bfea3b33, type: 2}
   endZoomOutTime: {fileID: 11400000, guid: c0564a13e5251ac4492e6303d928c0a7, type: 2}
-  DelayTriggerers:
+  delayTriggerers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
 --- !u!114 &1948601661940498248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,6 +343,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b22a15e76206422bba4ff3b5e7a28ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &549916964
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5984014605863478902}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.9441896, y: 1}
+  m_Direction: 0
 --- !u!1 &5984014605909219438
 GameObject:
   m_ObjectHideFlags: 0

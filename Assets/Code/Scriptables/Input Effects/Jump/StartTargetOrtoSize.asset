@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5aa338e67e0406880b45791dfd76b8a, type: 3}
   m_Name: StartTargetOrtoSize
   m_EditorClassIdentifier: 
-  value: 2.9
-  startValue: 2.9
+  value: -0.1
+  startValue: -0.1

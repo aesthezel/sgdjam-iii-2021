@@ -43,8 +43,8 @@ namespace Code.Utils.Environment
                 var go = _pooler.GetByID("FireBall");
                 go.transform.position = _shootPoint.position;
                 var dir = transform.right;
-                if (transform.localScale.x < 0) dir = transform.right; 
-                go.GetComponent<FireBall>().direction = transform.right * -1;
+                if (transform.localScale.x < 0) dir = transform.right * -1; 
+                go.GetComponent<FireBall>().direction = dir;
                 yield return new WaitForSeconds(cooldown);
             }
         }
