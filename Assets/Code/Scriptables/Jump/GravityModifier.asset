@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5aa338e67e0406880b45791dfd76b8a, type: 3}
   m_Name: GravityModifier
   m_EditorClassIdentifier: 
-  value: 1
+  value: 0
   startValue: 1

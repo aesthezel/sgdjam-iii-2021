@@ -1,4 +1,6 @@
-﻿using Code.UI;
+﻿using System;
+using Code.Services;
+using Code.UI;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,7 +13,7 @@ namespace Code.Hero
         [SerializeField] private PlayerInput playerInput;
         private PlayerReceiver _playerReceiver;
         private Rigidbody2D _rigidbody2D;
-        private ShowButtonsOnUI buttonController;
+        private ShowButtonsOnUI _buttonController;
         
         [ReadOnly] private int _inputIndex;
         
@@ -19,15 +21,16 @@ namespace Code.Hero
         {
             get => _inputIndex;
         }
-        
-        
 
         private void Awake()
         {
-            // TODO: In a future we could stop using FindWithTag with a Service Locator
-            _playerReceiver = GameObject.FindWithTag("Player").GetComponent<PlayerReceiver>();
-            buttonController = GameObject.FindWithTag("ButtonChangeUI").GetComponent<ShowButtonsOnUI>();
             _inputIndex = playerInput.playerIndex;
+        }
+
+        private void Start()
+        {
+            _buttonController = ServiceLocator.Instance.ObtainService<UIService>().ButtonDisplayer;
+            _playerReceiver = ServiceLocator.Instance.ObtainService<PlayerService>().Receiver;
         }
 
         public void MovementInput(InputAction.CallbackContext context)
@@ -36,7 +39,7 @@ namespace Code.Hero
             {
                 var movement = context.ReadValue<Vector2>();
                 _playerReceiver.MovementInput(_inputIndex, movement);
-                buttonController.ChangeImageMovement(_inputIndex, context.action.name, movement);
+                _buttonController.ChangeImageMovement(_inputIndex, context.action.name, movement);
             }
         }
 
@@ -46,7 +49,7 @@ namespace Code.Hero
 
             var actionName = context.action.name;
             _playerReceiver.InputActionPerformed(_inputIndex, actionName);
-            buttonController.ChangeImage(_inputIndex, actionName);
+            _buttonController.ChangeImage(_inputIndex, actionName);
         }
     }
 }

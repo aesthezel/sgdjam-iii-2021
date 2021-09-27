@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5aa338e67e0406880b45791dfd76b8a, type: 3}
   m_Name: DashDistance
   m_EditorClassIdentifier: 
-  value: 4
-  startValue: 4
+  value: 2
+  startValue: 2

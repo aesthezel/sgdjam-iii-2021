@@ -1,19 +1,21 @@
 ﻿using System.Collections;
-using Code.Hero;
 using UnityEngine;
 using Cinemachine;
+using Code.Camera;
+using Code.Interfaces;
 
-namespace Code.Camera
+namespace Code.Services
 {
-    public class CameraEffects : MonoBehaviour
+    public class CameraEffects : MonoBehaviour, IService
     {
         private CinemachineVirtualCamera _cCam;
         private CinemachineImpulseSource _impulseSource;
         
-        private void Awake()
+        private void Start()
         {
-            _cCam = transform.parent.GetComponent<CinemachineVirtualCamera>();
-            _impulseSource = GetComponent<CinemachineImpulseSource>();
+            var cam = ServiceLocator.Instance.ObtainService<MainCameraService>();
+            _cCam = cam.MainCamera;
+            _impulseSource = cam.ImpulseSource;
         }
 
         //-----------------

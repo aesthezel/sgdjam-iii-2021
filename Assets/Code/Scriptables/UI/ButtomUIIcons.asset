@@ -17,3 +17,9 @@ MonoBehaviour:
     uiButtom: {fileID: 21300000, guid: 2af3415de98d89d4f950fdf14917d0c1, type: 3}
   - inputName: Dash
     uiButtom: {fileID: 21300000, guid: 14459ac1643662344af0e8edfaf29098, type: 3}
+  - inputName: Right
+    uiButtom: {fileID: 4618267925945511539, guid: 30a6ebf88a89c00428d32db79efee3e0, type: 3}
+  - inputName: Left
+    uiButtom: {fileID: 592872083584965017, guid: 30a6ebf88a89c00428d32db79efee3e0, type: 3}
+  - inputName: Stop
+    uiButtom: {fileID: 0}

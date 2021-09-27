@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
-using Code.Camera;
+﻿using System.Collections;
 using Code.Data;
 using Code.Hero;
+using Code.Services;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Assertions;
-using DG.Tweening;
-using UnityEditorInternal;
 
 namespace Code.Utils
 {
@@ -15,8 +12,6 @@ namespace Code.Utils
     public class InputEffectsSubscriber: MonoBehaviour
     {
         [BoxGroup("CAMERA EFFECTS")]
-        [SerializeField] private CameraEffects effects;
-
         [TitleGroup("CAMERA EFFECTS/DASH")] 
         [SerializeField] private FloatData lookAheadDistance;
         [TitleGroup("CAMERA EFFECTS/DASH")] 
@@ -36,18 +31,17 @@ namespace Code.Utils
         [TitleGroup("CAMERA EFFECTS/TIME DELAY")] [SerializeField]
         private LayerMask DelayTriggerers;
         
-        
+        private CameraEffects _effects;
         private PlayerController _controller;
         private InputMapper _mapper;
 
-        private void Awake()
-        {
-            _controller = GetComponent<PlayerController>();
-            _mapper = GetComponent<InputMapper>();
-        }
-
         private void Start()
         {
+            var player = ServiceLocator.Instance.ObtainService<PlayerService>();
+            _effects = ServiceLocator.Instance.ObtainService<CameraEffects>();
+            _controller = player.Controller;
+            _mapper = player.Mapper;
+            
             JumpEffects();
             DashEffects();
         }
@@ -58,8 +52,8 @@ namespace Code.Utils
             Assert.IsTrue(done, "Error retrieving <Jump> input");
             
             actions.start += TimeDelay;
-            actions.start += f => effects.DoOrtoSize(startTargetOrtoSize.Value, f/3, Camera.Ease.InQuad);
-            actions.finished += () => effects.DoOrtoSize(normalOrtoSize.Value, endZoomOutTime.Value, Camera.Ease.OutQuad);
+            actions.start += f => _effects.DoOrtoSize(startTargetOrtoSize.Value, f/3, Camera.Ease.InQuad);
+            actions.finished += () => _effects.DoOrtoSize(normalOrtoSize.Value, endZoomOutTime.Value, Camera.Ease.OutQuad);
         }
 
         private void DashEffects()
@@ -68,7 +62,7 @@ namespace Code.Utils
             Assert.IsTrue(done, "Error retrieving <Dash> input");
             
             actions.start += TimeDelay;
-            actions.ok += f => effects.DoLookAhead(
+            actions.ok += f => _effects.DoLookAhead(
                 lookAheadDistance.Value,
                 _controller.FacingRight ? 1 : -1,
                 sustainTime.Value,
@@ -79,7 +73,7 @@ namespace Code.Utils
         // TODO: Mal Optimizado
         private void TimeDelay(float time)
         {
-            var objs = Physics2D.OverlapCircle(_controller.transform.position, 3, DelayTriggerers);
+            var objs = Physics2D.OverlapCircle(_controller.transform.position, 2, DelayTriggerers);
             if (objs != null)
             {
                 StartCoroutine(ProgressiveDelay(time));

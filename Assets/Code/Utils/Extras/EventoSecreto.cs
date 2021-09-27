@@ -1,10 +1,17 @@
+using System;
 using Code.Camera;
+using Code.Services;
 using UnityEngine;
 
 public class EventoSecreto : MonoBehaviour
 {
-    [SerializeField] private CameraEffects effects;
-    
+    private CameraEffects effects;
+
+    private void Start()
+    {
+        effects = ServiceLocator.Instance.ObtainService<CameraEffects>();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

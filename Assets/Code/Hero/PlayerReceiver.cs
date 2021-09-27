@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using System.Linq;
+using System.Threading;
+using Code.Services;
+using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -15,20 +18,9 @@ namespace Code.Hero
         private Coroutine _waitingCoroutine;
         private float _timeUntilComplete;
         private int _firstMindId = -1;
-        private int _lastMindId;
-        
-        public Action<int, string> MindIdChange;
-        
-        public int LastMindId
-        {
-            get => _lastMindId;
-            set
-            {
-                MindIdChange?.Invoke(value, _requiredActionToComplete);
-                _lastMindId = value;
-            }
-        }
-        
+
+        public bool ControlsEnabled { get; set; } = true;
+
         // Input Mapper
         private InputMapper _mapper;
 
@@ -42,6 +34,8 @@ namespace Code.Hero
 
         private void Start()
         {
+            ServiceLocator.Instance.ObtainService<InputManagerService>();
+            
             // For each Input subscribe the failure effect
             var keys = _mapper.ActionMapper.Keys;
             
@@ -61,11 +55,17 @@ namespace Code.Hero
         // --------------
         // INPUT METHODS
         // --------------
-        public void MovementInput(int mindId, Vector2 velocity) => _mapper.OnMove?.Invoke(mindId, velocity);
-
+        public void MovementInput(int mindId, Vector2 velocity)
+        {
+            if (!ControlsEnabled)
+                return;
+            
+            _mapper.OnMove?.Invoke(mindId, velocity);
+        } 
         public void InputActionPerformed(int mindId, string actionName)
         {
-            LastMindId = mindId;
+            if (!ControlsEnabled)
+                return;
             
             if (string.IsNullOrEmpty(_requiredActionToComplete))
                 InputEventStart(mindId, actionName, 1f);

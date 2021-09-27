@@ -11,7 +11,7 @@ namespace Code.Hero
     public class PlayerController : MonoBehaviour
     {
         [BoxGroup("--- Player Stats ---")]
-        [SerializeField] private FloatData _speed;
+        [SerializeField] private FloatData speed;
         [BoxGroup("--- Player Stats ---")]
         [SerializeField] private IntData lifes;
 
@@ -48,6 +48,7 @@ namespace Code.Hero
         // Components
         private Rigidbody2D _myRigidBody;
         private InputMapper _mapper;
+        private PlayerReceiver _receiver;
         
         // Checkpoint
         private Vector3 _lastFullyOnGround;
@@ -101,7 +102,6 @@ namespace Code.Hero
             }
         }
         
-        // TODO: public controls enabled would be better
         public bool CanMove { get; set; } = true;
 
         //----------------
@@ -111,6 +111,7 @@ namespace Code.Hero
         {
             _myRigidBody = GetComponent<Rigidbody2D>();
             _mapper = GetComponent<InputMapper>();
+            _receiver = GetComponent<PlayerReceiver>();
         }
 
         private void Start()
@@ -127,8 +128,13 @@ namespace Code.Hero
 
         private void FixedUpdate()
         {
-            if(CanMove)
+            if(CanMove && _receiver.ControlsEnabled)
                 Move();
+            else
+            {
+                _playerOneMovement = Vector2.zero;
+                _playerTwoMovement = Vector2.zero;
+            }
 
             if (!_isGrounded)
             {
@@ -184,7 +190,7 @@ namespace Code.Hero
         private void Move()
         {
             HorizontalDirection = ((_playerOneMovement + _playerTwoMovement) / 2f).x;
-            transform.Translate(Vector2.right * (HorizontalDirection * _speed.Value * Time.deltaTime));
+            transform.Translate(Vector2.right * (HorizontalDirection * speed.Value * Time.deltaTime));
         }
 
         //---------
@@ -192,7 +198,7 @@ namespace Code.Hero
         //---------
         private bool PerformNormalJump(float reactionTime)
         {
-            var canJump = (IsGrounded || _canDoubleJump) && _jumpCount < 2 ;
+            var canJump = _jumpCount < 2;
 
             if (canJump)
             {
@@ -237,10 +243,10 @@ namespace Code.Hero
         //---------
         // DASHES
         //---------
-        private void Dash(float elapsedTIme)
+        private void Dash(float elapsedTime)
         {
             var dd = dashDistance.Value;
-            var movDistance = elapsedTIme< dashSuccessMaxTime.Value ? dd : (1 - elapsedTIme) * dd;
+            var movDistance = elapsedTime < dashSuccessMaxTime.Value ? dd : (1 - elapsedTime) * dd;
             var direction = _facingRight ? 1 : -1;
             var destiny = transform.position + (Vector3.right * movDistance * direction);
             
@@ -248,7 +254,7 @@ namespace Code.Hero
             _airTime = 0;
             
             // Si queremos que no se puedan encadenar dash y saltos descomentar esto
-            //_jumpCount++;
+            _jumpCount++;
 
             if (!_isGrounded)
                 _canDash = false;
@@ -266,8 +272,20 @@ namespace Code.Hero
         //----------------
         // CHECKPOINT
         //----------------
-        public void BackToCheckpoint() => transform.position = _lastFullyOnGround;
+        public void BackToCheckpoint()
+        {
+            _myRigidBody.velocity = Vector2.zero;
+            transform.position = _lastFullyOnGround;
+            StartCoroutine(WaitForControl(0.5f));
+        }
 
+        private IEnumerator WaitForControl(float time)
+        {
+            _receiver.ControlsEnabled = false;
+            yield return new WaitForSeconds(time);
+            _receiver.ControlsEnabled = true;
+        }
+        
         private void UpdateCheckpointPos()
         {
             var checkers = 0;
