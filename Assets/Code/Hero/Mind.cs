@@ -12,7 +12,6 @@ namespace Code.Hero
     {
         [SerializeField] private PlayerInput playerInput;
         private PlayerReceiver _playerReceiver;
-        private Rigidbody2D _rigidbody2D;
         private ShowButtonsOnUI _buttonController;
         
         [ReadOnly] private int _inputIndex;

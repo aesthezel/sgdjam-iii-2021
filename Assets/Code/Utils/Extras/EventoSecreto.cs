@@ -7,11 +7,11 @@ public class EventoSecreto : MonoBehaviour
 {
     [SerializeField] private float OrthoShize;
     private CameraEffects effects;
-    private MainCameraService camera;
+    private MainCameraService cam;
     
     private void Start()
     {
-        camera = ServiceLocator.Instance.ObtainService<MainCameraService>();
+        cam = ServiceLocator.Instance.ObtainService<MainCameraService>();
         effects = ServiceLocator.Instance.ObtainService<CameraEffects>();
     }
 

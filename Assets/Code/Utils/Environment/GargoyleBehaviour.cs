@@ -12,27 +12,12 @@ namespace Code.Utils.Environment
         private ObjectPooler _pooler;
         private Transform _shootPoint;
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                StartCoroutine(ShootCoroutine());
-            }
-        }
-        
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                StopAllCoroutines();
-            }
-        }
-        
 
         private void Start()
         {
             _pooler = ServiceLocator.Instance.ObtainService<MainPoolerService>().Pooler;
             _shootPoint = transform.GetChild(0).transform;
+            StartCoroutine(ShootCoroutine());   
         }
 
         private IEnumerator ShootCoroutine()
@@ -43,8 +28,8 @@ namespace Code.Utils.Environment
                 var go = _pooler.GetByID("FireBall");
                 go.transform.position = _shootPoint.position;
                 var dir = transform.right;
-                if (transform.localScale.x < 0) dir = transform.right * -1; 
-                go.GetComponent<FireBall>().direction = dir;
+                if (transform.localScale.x < 0) dir = transform.right; 
+                go.GetComponent<FireBall>().Direction = transform.right;
                 yield return new WaitForSeconds(cooldown);
             }
         }

@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
-using System.Threading;
 using Code.Services;
-using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -60,8 +58,9 @@ namespace Code.Hero
             if (!ControlsEnabled)
                 return;
             
-            _mapper.OnMove?.Invoke(mindId, velocity);
-        } 
+            _mapper.onMove?.Invoke(mindId, velocity);
+        }
+        
         public void InputActionPerformed(int mindId, string actionName)
         {
             if (!ControlsEnabled)
@@ -111,6 +110,7 @@ namespace Code.Hero
                 Debug.Log("IN TIME!");
                 actions.ok?.Invoke(_timeUntilComplete);
             }
+            
             // Doesn't matter if the event was completed successfully or not when second player inout is detected
             // the event must finish to give chance to other events to perform
             actions.finished?.Invoke();

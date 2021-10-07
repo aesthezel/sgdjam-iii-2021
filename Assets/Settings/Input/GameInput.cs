@@ -817,6 +817,140 @@ namespace Settings.Input
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Test"",
+            ""id"": ""5036710f-e6b4-4578-8891-f40dd6b77c9d"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Button"",
+                    ""id"": ""c637b694-a08f-406f-80b3-384d70a61b08"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Arrow Movement"",
+                    ""type"": ""Button"",
+                    ""id"": ""604656fc-03e2-4a86-a6e7-43b63a26fc18"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""5b54f951-f0dc-4b55-b77e-1c591783c789"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""69e3d662-08aa-4ff8-aaaa-bcc6d681187b"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""ea4e9fc3-59f9-4c1b-9822-1935a33117e3"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""62038826-8ac3-4818-ae02-c4070c82ed78"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""454a3491-b479-4733-ba31-d7a4d2b7ca35"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""c14cd158-e55f-4b11-b452-ba8720c2e1d5"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""b203bebf-2832-4359-b5bb-7495e51f322e"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Arrow Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""5c234886-fd0e-41e3-94fc-fe49c3749668"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""c85fbecc-36c4-4a3e-a48e-6bbd3c0832a5"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""ddb186fa-b17b-40ea-93f6-bc588dee9a7e"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -861,6 +995,10 @@ namespace Settings.Input
             m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
             m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
             m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+            // Test
+            m_Test = asset.FindActionMap("Test", throwIfNotFound: true);
+            m_Test_Movement = m_Test.FindAction("Movement", throwIfNotFound: true);
+            m_Test_ArrowMovement = m_Test.FindAction("Arrow Movement", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -1060,6 +1198,47 @@ namespace Settings.Input
             }
         }
         public UIActions @UI => new UIActions(this);
+
+        // Test
+        private readonly InputActionMap m_Test;
+        private ITestActions m_TestActionsCallbackInterface;
+        private readonly InputAction m_Test_Movement;
+        private readonly InputAction m_Test_ArrowMovement;
+        public struct TestActions
+        {
+            private @GameInput m_Wrapper;
+            public TestActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Movement => m_Wrapper.m_Test_Movement;
+            public InputAction @ArrowMovement => m_Wrapper.m_Test_ArrowMovement;
+            public InputActionMap Get() { return m_Wrapper.m_Test; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(TestActions set) { return set.Get(); }
+            public void SetCallbacks(ITestActions instance)
+            {
+                if (m_Wrapper.m_TestActionsCallbackInterface != null)
+                {
+                    @Movement.started -= m_Wrapper.m_TestActionsCallbackInterface.OnMovement;
+                    @Movement.performed -= m_Wrapper.m_TestActionsCallbackInterface.OnMovement;
+                    @Movement.canceled -= m_Wrapper.m_TestActionsCallbackInterface.OnMovement;
+                    @ArrowMovement.started -= m_Wrapper.m_TestActionsCallbackInterface.OnArrowMovement;
+                    @ArrowMovement.performed -= m_Wrapper.m_TestActionsCallbackInterface.OnArrowMovement;
+                    @ArrowMovement.canceled -= m_Wrapper.m_TestActionsCallbackInterface.OnArrowMovement;
+                }
+                m_Wrapper.m_TestActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Movement.started += instance.OnMovement;
+                    @Movement.performed += instance.OnMovement;
+                    @Movement.canceled += instance.OnMovement;
+                    @ArrowMovement.started += instance.OnArrowMovement;
+                    @ArrowMovement.performed += instance.OnArrowMovement;
+                    @ArrowMovement.canceled += instance.OnArrowMovement;
+                }
+            }
+        }
+        public TestActions @Test => new TestActions(this);
         private int m_GamepadSchemeIndex = -1;
         public InputControlScheme GamepadScheme
         {
@@ -1096,6 +1275,11 @@ namespace Settings.Input
             void OnRightClick(InputAction.CallbackContext context);
             void OnTrackedDevicePosition(InputAction.CallbackContext context);
             void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+        }
+        public interface ITestActions
+        {
+            void OnMovement(InputAction.CallbackContext context);
+            void OnArrowMovement(InputAction.CallbackContext context);
         }
     }
 }

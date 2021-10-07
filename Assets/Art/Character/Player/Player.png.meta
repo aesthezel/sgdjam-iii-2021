@@ -1,0 +1,1236 @@
+fileFormatVersion: 2
+guid: 05be9cb8c44b0b34a9bddb02350c02b8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4026635767349969615
+    second: Animacion_Misma_ZONA0200
+  - first:
+      213: 4594562943796504283
+    second: Animacion_Misma_ZONA0201
+  - first:
+      213: 3864625108631239977
+    second: Animacion_Misma_ZONA0202
+  - first:
+      213: 8790539592389512966
+    second: Animacion_Misma_ZONA0203
+  - first:
+      213: 5617520017667218734
+    second: Animacion_Misma_ZONA0204
+  - first:
+      213: -5062696892845528993
+    second: Animacion_Misma_ZONA0205
+  - first:
+      213: -6265514424965890119
+    second: Animacion_Misma_ZONA0206
+  - first:
+      213: 5836894838816101820
+    second: Animacion_Misma_ZONA0207
+  - first:
+      213: -3240729849685582261
+    second: Animacion_Misma_ZONA0208
+  - first:
+      213: -8851384950627769473
+    second: Animacion_Misma_ZONA0209
+  - first:
+      213: -8941606571209655244
+    second: Animacion_Misma_ZONA0210
+  - first:
+      213: 9058557713399252463
+    second: Animacion_Misma_ZONA0211
+  - first:
+      213: -1702838148237638542
+    second: Animacion_Misma_ZONA0212
+  - first:
+      213: -2812292311460684860
+    second: Animacion_Misma_ZONA0213
+  - first:
+      213: 357718352108131287
+    second: Animacion_Misma_ZONA0214
+  - first:
+      213: 8232489257712922253
+    second: Animacion_Misma_ZONA0215
+  - first:
+      213: 6355681142623668408
+    second: Animacion_Misma_ZONA0216
+  - first:
+      213: -5520925053324239583
+    second: Animacion_Misma_ZONA0217
+  - first:
+      213: -1483717700614020677
+    second: Animacion_Misma_ZONA0218
+  - first:
+      213: -169534849094686809
+    second: Animacion_Misma_ZONA0219
+  - first:
+      213: 308051527300194547
+    second: Animacion_Misma_ZONA0220
+  - first:
+      213: -9188928823614372912
+    second: Animacion_Misma_ZONA0221
+  - first:
+      213: -7775848484822570703
+    second: Animacion_Misma_ZONA0222
+  - first:
+      213: 5601987656249018233
+    second: Animacion_Misma_ZONA0223
+  - first:
+      213: 1869763131438861688
+    second: Animacion_Misma_ZONA0224
+  - first:
+      213: -1820635432425810884
+    second: Animacion_Misma_ZONA0225
+  - first:
+      213: -4861367699173545504
+    second: Animacion_Misma_ZONA0226
+  - first:
+      213: -4727103450003670370
+    second: Animacion_Misma_ZONA0227
+  - first:
+      213: -2731177580501333422
+    second: Animacion_Misma_ZONA0228
+  - first:
+      213: 2356449192941207445
+    second: Animacion_Misma_ZONA0229
+  - first:
+      213: 4754964744015674103
+    second: Animacion_Misma_ZONA0230
+  - first:
+      213: 3732019057954551580
+    second: Animacion_Misma_ZONA0231
+  - first:
+      213: 614957835065008366
+    second: Animacion_Misma_ZONA0232
+  - first:
+      213: 9045575053553782486
+    second: Animacion_Misma_ZONA0233
+  - first:
+      213: -5065271114682632513
+    second: Animacion_Misma_ZONA0234
+  - first:
+      213: -8963049026332526072
+    second: Animacion_Misma_ZONA0235
+  - first:
+      213: -1011894151118759731
+    second: Animacion_Misma_ZONA0236
+  - first:
+      213: 4845039419079249816
+    second: Animacion_Misma_ZONA0237
+  - first:
+      213: -3725485631795142896
+    second: Animacion_Misma_ZONA0238
+  - first:
+      213: -5342781911046990686
+    second: Animacion_Misma_ZONA0239
+  - first:
+      213: 8993767961524515926
+    second: Animacion_Misma_ZONA0240
+  - first:
+      213: 1770603397238960676
+    second: Animacion_Misma_ZONA0241
+  - first:
+      213: 834998656111268547
+    second: Animacion_Misma_ZONA0242
+  - first:
+      213: -7390243305029259383
+    second: Animacion_Misma_ZONA0243
+  - first:
+      213: 1262805480579396400
+    second: Animacion_Misma_ZONA0244
+  - first:
+      213: -8089338545230322736
+    second: Animacion_Misma_ZONA0245
+  - first:
+      213: 8385614246477904752
+    second: Animacion_Misma_ZONA0246
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 40
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0200
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 855
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13df8378a148e18c0800000000000000
+      internalID: -4026635767349969615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0201
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 855
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd6e92387aa23cf30800000000000000
+      internalID: 4594562943796504283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0202
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 855
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92d35068f08e1a530800000000000000
+      internalID: 3864625108631239977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0203
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 855
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60f426c5f254ef970800000000000000
+      internalID: 8790539592389512966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0204
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 855
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2d53b371b075fd40800000000000000
+      internalID: 5617520017667218734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0205
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 855
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f58e770dfffadb9b0800000000000000
+      internalID: -5062696892845528993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0206
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 733
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bf72dc93db6c09a0800000000000000
+      internalID: -6265514424965890119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0207
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 733
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb5d1f24ee0d00150800000000000000
+      internalID: 5836894838816101820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0208
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 733
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4e5c703f5d9603d0800000000000000
+      internalID: -3240729849685582261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0209
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 733
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f73e797b840992580800000000000000
+      internalID: -8851384950627769473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0210
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 733
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43cffb9b23809e380800000000000000
+      internalID: -8941606571209655244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0211
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 733
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe5898cfe3676bd70800000000000000
+      internalID: 9058557713399252463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0212
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 611
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 274cf48e9bd4e58e0800000000000000
+      internalID: -1702838148237638542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0213
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 611
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cbd2dafa0bb8f8d0800000000000000
+      internalID: -2812292311460684860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0214
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 611
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d31b0b22fed6f400800000000000000
+      internalID: 357718352108131287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0215
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 611
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8ea23fbc5daf3270800000000000000
+      internalID: 8232489257712922253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0216
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 611
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b88bbb435ae33850800000000000000
+      internalID: 6355681142623668408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0217
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 611
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12ddd054aebb163b0800000000000000
+      internalID: -5520925053324239583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0218
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 489
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb121f3cc96c86be0800000000000000
+      internalID: -1483717700614020677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0219
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 489
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a769a6f3f0b5adf0800000000000000
+      internalID: -169534849094686809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0220
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 489
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f0ae316b3b664400800000000000000
+      internalID: 308051527300194547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0221
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 489
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d30e128bed5a7080800000000000000
+      internalID: -9188928823614372912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0222
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 489
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13924e25003a61490800000000000000
+      internalID: -7775848484822570703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0223
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 489
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97788deb7124ebd40800000000000000
+      internalID: 5601987656249018233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0224
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 367
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87d098f59abb2f910800000000000000
+      internalID: 1869763131438861688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0225
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 367
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3415c868bdcbb6e0800000000000000
+      internalID: -1820635432425810884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0226
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 367
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e9e33095d3f88cb0800000000000000
+      internalID: -4861367699173545504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0227
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 367
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9af10e1574f56eb0800000000000000
+      internalID: -4727103450003670370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0228
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 367
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25a05bff578e81ad0800000000000000
+      internalID: -2731177580501333422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0229
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 367
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59f34845e0ac3b020800000000000000
+      internalID: 2356449192941207445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0230
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 245
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fa7f86ed370df140800000000000000
+      internalID: 4754964744015674103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0231
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 245
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c177e546f8bcac330800000000000000
+      internalID: 3732019057954551580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0232
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 245
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee0a4ee84e4c88800800000000000000
+      internalID: 614957835065008366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0233
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 245
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6de4530f596588d70800000000000000
+      internalID: 9045575053553782486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0234
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 245
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb67b4612ca84b9b0800000000000000
+      internalID: -5065271114682632513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0235
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 245
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80af909166adc9380800000000000000
+      internalID: -8963049026332526072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0236
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 123
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc8554c71a705f1f0800000000000000
+      internalID: -1011894151118759731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0237
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 123
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89fcbf87ea90d3340800000000000000
+      internalID: 4845039419079249816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0238
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 123
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01f570d6e8a6c4cc0800000000000000
+      internalID: -3725485631795142896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0239
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 123
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a459afb820aad5b0800000000000000
+      internalID: -5342781911046990686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0240
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 123
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65435fa5f4840dc70800000000000000
+      internalID: 8993767961524515926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0241
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 123
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4223782a862729810800000000000000
+      internalID: 1770603397238960676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0242
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c2d07d8ad2869b00800000000000000
+      internalID: 834998656111268547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0243
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 1
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98fa5088ed4907990800000000000000
+      internalID: -7390243305029259383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0244
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 1
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 033f95ad4e2668110800000000000000
+      internalID: 1262805480579396400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0245
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 1
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d3eba7c375ecbf80800000000000000
+      internalID: -8089338545230322736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Animacion_Misma_ZONA0246
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1
+        width: 160
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07b35c07abfaf5470800000000000000
+      internalID: 8385614246477904752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

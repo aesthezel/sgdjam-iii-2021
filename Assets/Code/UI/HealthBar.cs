@@ -11,7 +11,8 @@ namespace Code.UI
         [SerializeField] private GameObject _healthIconPrefab;
         [SerializeField] private IntData _playerLifes;
         private GameObject[] _instantiatedGO;
-
+        private Animator[] _animators;
+        
         private void Awake()
         {
             InstancePlayerHealthOnUI();
@@ -25,19 +26,20 @@ namespace Code.UI
         private void InstancePlayerHealthOnUI()
         {
             _instantiatedGO = new GameObject[_playerLifes.Value];
+            _animators = new Animator[_playerLifes.Value];
             
             for (var i = 0; i < _playerLifes.Value; i++)
             {
+                 
                 _instantiatedGO[i] = Instantiate(_healthIconPrefab, gameObject.transform);
+                _animators[i] = _instantiatedGO[i].GetComponent<Animator>();
             }
         }
         
         private void OnPlayerReceiveDamage()
         {
-            for (var i = 0; i < _instantiatedGO.Length; i++)
-            {
-                _instantiatedGO[i].SetActive(i < _playerLifes.Value);
-            }
+            if(_playerLifes.Value >= 0)
+                _animators[_playerLifes.Value].SetTrigger("Hit");
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Code.Hero
         [Header("--- DYING ---")]
         [SerializeField] private EventStacker onDieEvent;
         
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
             

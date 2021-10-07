@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
-using Code.Hero;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +12,9 @@ namespace Code.UI
         
         public void ChangeImage(int mind, string actionName)
         {
-            images[mind].sprite = sprites.GetByName(actionName);
+            var image = images[mind];
+            image.enabled = true;
+            image.sprite = sprites.GetByName(actionName);
             
             if(_delayCoroutine != null)
                 StopCoroutine(_delayCoroutine);
@@ -26,7 +25,8 @@ namespace Code.UI
         public void ChangeImageMovement(int mind, string actionName, Vector2 movement)
         {
             var name = "Stop";
-            
+            var imageUI = images[mind + 2];
+
             if (movement.x > 0.05f)
                 name = "Right";
             else if(movement.x < -0.05f)
@@ -35,15 +35,19 @@ namespace Code.UI
             var image = sprites.GetByName(name);
 
             if (name.Equals("Stop"))
-                image = null;
+            {
+                imageUI.enabled = false;
+                return;
+            }
 
-            images[mind + 2].sprite = image;
+            imageUI.enabled = true;
+            imageUI.sprite = image;
         }
 
         private IEnumerator SpriteBackToNull(Image image)
         {
             yield return new WaitForSeconds(1f);
-            image.sprite = null;
+            image.enabled = false;
         }
     }
 }

@@ -26,7 +26,17 @@ namespace Code.Hero
 
         [BoxGroup("-- Looking --")]
         [SerializeField] private Transform bodyPart;
-
+        
+        [BoxGroup("--- Animator ---")] 
+        [SerializeField] private Animator bodyAnimator;
+        [BoxGroup("--- Animator ---")] 
+        [SerializeField] private string movementAnimationVar, 
+            runningAnimationVar,
+            jumpAnimationVar, 
+            dashAnimationVar,
+            hitAnimationVar,
+            groundedAnimationVar;
+        
         [BoxGroup("--- Skill Configs ---")]
         
         [TitleGroup("--- Skill Configs ---/Dash")]
@@ -128,24 +138,24 @@ namespace Code.Hero
             IsGrounded = CheckGrounded();
             
             // Evita que se quede enganchado en las paredes
-            var hit = Physics2D.Raycast(transform.position, bodyPart.right, 0.2f, whatIsWall);
-            if (hit.collider != null && _jumping)
-            {
-                if (_facingRight)
-                {
-                    if(_playerOneMovement.x > 0)
-                        _playerOneMovement.x = 0; 
-                    if(_playerTwoMovement.x > 0)
-                        _playerTwoMovement.x = 0;
-                }
-                else
-                {
-                    if(_playerOneMovement.x < 0)
-                        _playerOneMovement.x = 0; 
-                    if(_playerTwoMovement.x < 0)
-                        _playerTwoMovement.x = 0;
-                }
-            }
+            // var hit = Physics2D.Raycast(transform.position, bodyPart.right, 0.2f, whatIsWall);
+            // if (hit.collider != null && _jumping)
+            // {
+            //     if (_facingRight)
+            //     {
+            //         if(_playerOneMovement.x > 0)
+            //             _playerOneMovement.x = 0; 
+            //         if(_playerTwoMovement.x > 0)
+            //             _playerTwoMovement.x = 0;
+            //     }
+            //     else
+            //     {
+            //         if(_playerOneMovement.x < 0)
+            //             _playerOneMovement.x = 0; 
+            //         if(_playerTwoMovement.x < 0)
+            //             _playerTwoMovement.x = 0;
+            //     }
+            // }
             
             if (!_isGrounded)
             {
@@ -167,7 +177,6 @@ namespace Code.Hero
                 _playerOneMovement = Vector2.zero;
                 _playerTwoMovement = Vector2.zero;
             }
-
         }
         
         private void LateUpdate()
@@ -200,7 +209,7 @@ namespace Code.Hero
             dashEvents.ok += Dash;
         }
 
-        private void SubscribeMovementActions() => _mapper.OnMove += UpdateMovement;
+        private void SubscribeMovementActions() => _mapper.onMove += UpdateMovement;
 
 
         //-----------
@@ -217,6 +226,10 @@ namespace Code.Hero
         private void Move()
         {
             HorizontalDirection = ((_playerOneMovement + _playerTwoMovement) / 2f).x;
+            
+            bodyAnimator.SetFloat(movementAnimationVar, Mathf.Abs(HorizontalDirection));
+            bodyAnimator.SetBool(runningAnimationVar, Mathf.Abs(HorizontalDirection) > 0.5f);
+            
             transform.Translate(Vector2.right * (HorizontalDirection * speed.Value * Time.deltaTime));
         }
 
@@ -236,6 +249,8 @@ namespace Code.Hero
                 
                 if(_coyoteCheck)
                     ResetCoyoteTime();
+                
+                bodyAnimator.SetTrigger(jumpAnimationVar);
 
                 _myRigidBody.velocity = new Vector2(_myRigidBody.velocity.x, 0);
                 _myRigidBody.AddForce(Vector2.up * jumpForceAlone.Value, ForceMode2D.Impulse);
@@ -248,7 +263,7 @@ namespace Code.Hero
         {
             _jumpCompleted = true;
             _airTime = 0;
-            _myRigidBody.velocity = new Vector2(_myRigidBody.velocity.x, 0);
+            //_myRigidBody.velocity = new Vector2(_myRigidBody.velocity.x, 0);
             _myRigidBody.AddForce(Vector2.up * jumpForceCombined.Value, ForceMode2D.Impulse);
         }
 
@@ -279,6 +294,7 @@ namespace Code.Hero
             
             CanMove = false;
             _airTime = 0;
+            bodyAnimator.SetTrigger(dashAnimationVar);
             
             // Si queremos que no se puedan encadenar dash y saltos descomentar esto
             _jumpCount++;
@@ -291,6 +307,8 @@ namespace Code.Hero
             {
                 hitChecker.enabled = true;
                 CanMove = true;
+                bodyAnimator.SetBool(dashAnimationVar, false);
+
             };
         }
 
@@ -312,7 +330,7 @@ namespace Code.Hero
             yield return new WaitForSeconds(time);
             _receiver.ControlsEnabled = true;
         }
-        
+
         private void UpdateCheckpointPos()
         {
             var checkers = 0;
@@ -321,11 +339,11 @@ namespace Code.Hero
                 if (Physics2D.Raycast(checker.position, Vector2.down, 0.2f, whatIsNotCheckpoint))
                     checkers++;
             }
-            
-            if(checkers < groundCheckers.Length)
+
+            if (checkers < groundCheckers.Length)
                 _lastFullyOnGround = transform.position;
-        }
-        
+        }  
+
         //----------------
         // GROUND CHECK
         //----------------
@@ -343,6 +361,8 @@ namespace Code.Hero
             if (checkers == groundCheckers.Length)
                 UpdateCheckpointPos();
 
+            bodyAnimator.SetBool(groundedAnimationVar, checkers > 0);
+            
             return checkers > 0;
         }
 
