@@ -38,7 +38,7 @@ namespace Code.Hero
             {
                 var movement = context.ReadValue<Vector2>();
                 _playerReceiver.MovementInput(_inputIndex, movement);
-                _buttonController.ChangeImageMovement(_inputIndex, context.action.name, movement);
+                _buttonController.ChangeMovementIndicator(_inputIndex, context.action.name, movement);
             }
         }
 
@@ -48,7 +48,7 @@ namespace Code.Hero
 
             var actionName = context.action.name;
             _playerReceiver.InputActionPerformed(_inputIndex, actionName);
-            _buttonController.ChangeImage(_inputIndex, actionName);
+            _buttonController.ChangeSkillIndicator(_inputIndex, actionName);
         }
     }
 }

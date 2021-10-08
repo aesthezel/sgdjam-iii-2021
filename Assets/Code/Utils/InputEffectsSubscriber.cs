@@ -52,8 +52,8 @@ namespace Code.Utils
             Assert.IsTrue(done, "Error retrieving <Jump> input");
             
             //actions.start += TimeDelay;
-            actions.start += f => _effects.DoOrtoSize(startTargetOrtoSize.Value, f/3, Camera.Ease.InQuad);
-            actions.finished += () => _effects.DoOrtoSize(startTargetOrtoSize.Value * -1, endZoomOutTime.Value, Camera.Ease.OutQuad);
+            actions.start += f => _effects.DoOrtoSize(startTargetOrtoSize.Value, f/3, CameraSystem.Ease.InQuad);
+            actions.finished += () => _effects.DoOrtoSize(startTargetOrtoSize.Value * -1, endZoomOutTime.Value, CameraSystem.Ease.OutQuad);
         }
 
         private void DashEffects()

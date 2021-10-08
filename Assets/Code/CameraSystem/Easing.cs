@@ -1,4 +1,4 @@
-﻿namespace Code.Camera
+﻿namespace Code.CameraSystem
 {
     public enum Ease
     {

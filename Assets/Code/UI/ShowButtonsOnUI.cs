@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using Code.Services;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,21 +10,37 @@ namespace Code.UI
     {
         [SerializeField] private InputSpritesUI sprites;
         [SerializeField] private Image[] images;
-        private Coroutine _delayCoroutine;
+        private Coroutine _p1delayCoroutine;
+        private Coroutine _p2delayCoroutine;
+
+        private void Start()
+        {
+            var player = ServiceLocator.Instance.ObtainService<PlayerService>();
+        }
+
         
-        public void ChangeImage(int mind, string actionName)
+        public void ChangeSkillIndicator(int mind, string actionName)
         {
             var image = images[mind];
             image.enabled = true;
             image.sprite = sprites.GetByName(actionName);
             
-            if(_delayCoroutine != null)
-                StopCoroutine(_delayCoroutine);
+            if (mind == 0)
+            {
+                if(_p1delayCoroutine != null)
+                    StopCoroutine(_p1delayCoroutine);
+                _p1delayCoroutine = StartCoroutine(SpriteBackToNull(images[mind]));
+            }
             
-            _delayCoroutine = StartCoroutine(SpriteBackToNull(images[mind]));
+            else if (mind == 1)
+            {
+                if(_p2delayCoroutine != null)
+                    StopCoroutine(_p2delayCoroutine);
+                _p2delayCoroutine = StartCoroutine(SpriteBackToNull(images[mind]));
+            }
         }
         
-        public void ChangeImageMovement(int mind, string actionName, Vector2 movement)
+        public void ChangeMovementIndicator(int mind, string actionName, Vector2 movement)
         {
             var name = "Stop";
             var imageUI = images[mind + 2];

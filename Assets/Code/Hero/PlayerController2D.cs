@@ -3,10 +3,10 @@ using System.Collections;
 using System.Linq;
 using Code.Data;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
-using Unity.Mathematics;
 using UnityEngine.Assertions;
+using DG.Tweening;
+using UnityEngine.TextCore;
 
 namespace Code.Hero
 {
@@ -51,7 +51,8 @@ namespace Code.Hero
                                         jumpAnimationVar, 
                                         dashAnimationVar,
                                         hitAnimationVar,
-                                        groundedAnimationVar;
+                                        groundedAnimationVar, 
+                                        fallAnimationVar;
         
         [BoxGroup("Checkpoint")]
         [SerializeField] private LayerMask whatIsNotCheckpoint;
@@ -78,21 +79,21 @@ namespace Code.Hero
         private InputMapper _mapper;
         private Vector2 _playerOneInput;
         private Vector2 _playerTwoInput;
-
+        private bool _canMove = true;
+        private bool _canGetHit = true;
+        
         // NEW STUFF
         // TODO: Movimiento 2 jugadores... DONE
-        // TODO: Jump
-        // TODO: Double jump
-        // TODO: Dash
-        // TODO: Checkpoint
+        // TODO: Jump ... DONE
+        // TODO: Double jump ... NOT IMPLEMENTED
+        // TODO: Dash ... DONE
+        // TODO: Checkpoint ... DONE
         // TODO: Coyote time
         
 
         private bool _jumping;
-        private int _jumpCount;
         private bool _jumpCompleted;
         private bool _coyoteCheck;
-        private bool _canDoubleJump;
         private bool _canDash;
         private Vector3 _lastFullyOnGround;
         private Vector2 _playerOneMovement;
@@ -106,21 +107,13 @@ namespace Code.Hero
         private Vector2 PlayerOneInput
         {
             get => _playerOneInput;
-            set
-            {
-                SetPlayerInput((_playerTwoInput + value) / 2f);
-                _playerOneInput = value;
-            }
+            set => _playerOneInput = value;
         }
         
         private Vector2 PlayerTwoInput
         {
             get => _playerTwoInput; 
-            set
-            {
-                SetPlayerInput((_playerOneInput + value) / 2f);
-                _playerTwoInput = value;
-            }
+            set => _playerTwoInput = value;
         }
 
         public bool Grounded
@@ -133,8 +126,10 @@ namespace Code.Hero
                 {
                     _currentGravityModifier = gravityModifier;
                     _currentVelocity.y = _currentVelocity.y < 0 ? 0 : _currentVelocity.y;
+                    ResetJumpValues();
+                    _canDash = true;
                 }
-
+                
                 _grounded = value;
             }
         }
@@ -144,7 +139,11 @@ namespace Code.Hero
         // -------------------
         public PlayerCollisions PlayerCollisions => _playerCollisions;
         public Vector2 CurrentVelocity => _currentVelocity;
-
+        public float FacingDirection => _facingDirection;
+        public bool Dashing => !_canDash;
+        
+        public float DistanceToGround { get; private set; }
+        public Vector2 lastCheckpoint { get; private set; }
 
         // -------------------
         // UNITY METHODS
@@ -168,13 +167,17 @@ namespace Code.Hero
             
             // Update players' input direction
             _mapper.onMove += UpdateMindInput;
+            lifes.OnValueChange += GetHit;
             
             // Subscribe jump methods to combined event system
             SubscribeJumpActions();
+            SubscribeDashActions();
         }
 
         private void Update()
         {
+            SetPlayerInput();
+            
             UpdateRayOrigins();
             
             CheckGrounded();
@@ -203,25 +206,29 @@ namespace Code.Hero
         // -------------
         private void UpdateMindInput(int mindId, Vector2 inputVector)
         {
-            if (mindId == 0)
-                PlayerOneInput = inputVector;
-            else if (mindId == 1)
-                PlayerTwoInput = inputVector;
-        }
-        
-        private void SetPlayerInput(Vector2 value)
-        {
-            // Value is the combined mean of players' input vectors
-            if (_playerInput.x != value.x)
+            if (_canMove)
             {
-                CalculateFacingDirection(value.x);
-                _currentVelocity.x = moveVelocity * value.x;
+                if (mindId == 0)
+                    PlayerOneInput = inputVector;
+                else if (mindId == 1)
+                    PlayerTwoInput = inputVector;
             }
-            
-            _playerInput = value;
         }
         
+        private void SetPlayerInput()
+        {
+            var newDir = (_playerTwoInput + _playerOneInput) / 2f;
+            
+            if (_playerInput.x != newDir.x)
+            {
+                CalculateFacingDirection(newDir.x);
+                _currentVelocity.x = moveVelocity * newDir.x;
+            }
+
+            _playerInput = newDir;
+        }
         
+
         //---------------------------------
         // SUBSCRIPTIONS TO INPUT ACTIONS
         //---------------------------------
@@ -232,32 +239,127 @@ namespace Code.Hero
             
             jumpEvents.checker += PerformNormalJump;
             jumpEvents.ok += PerformSuperJump;
-            jumpEvents.finished += CheckForDoubleJump;
+            jumpEvents.finished += () => Debug.Log("Jump Finished");
         }
+        
+        private void SubscribeDashActions()
+        {
+            var bDashAction = _mapper.ActionMapper.TryGetValue("Dash", out var dashEvents);
+            Assert.IsTrue(bDashAction, "$Jump input action not found in $InputMapper");
+            
+            dashEvents.checker += CheckDash;
+            dashEvents.ok += Dash;
+            dashEvents.finished += DashFinished;
+        }
+        
         
         // -------------
         // Jump
         // -------------
         private bool PerformNormalJump(float time)
         {
-            _currentVelocity.y = jumpVel/2;
-            JumpAnimation();
-            return true;
+            if (Grounded)
+            {
+                _jumping = true;
+                _currentVelocity.y = jumpVel/2;
+                JumpAnimation();
+            }
+
+            return Grounded;
         }
 
         private void PerformSuperJump(float elapsedTime)
         {
             _currentGravityModifier = gravityModifier;
-            _currentVelocity.y = jumpVel;
-            JumpAnimation();
+            
+            if(elapsedTime < 0.3f)
+                _currentVelocity.y = jumpVel;
+            else
+                _currentVelocity.y = jumpVel * 2f / 3f;
+
+            //JumpAnimation();
+
+            _jumpCompleted = true;
+        }
+        
+        private void ResetJumpValues()
+        {
+            if (_jumping && !_jumpCompleted)
+                _mapper.ActionMapper["Jump"].finished?.Invoke();
+
+            _jumping = false;
+            _jumpCompleted = false;
+        }
+        
+        
+        // -------------
+        // Dash
+        // -------------
+        private bool CheckDash(float time)
+        {
+            return _canDash;
+        }
+        
+        private void Dash(float elapsedTime)
+        {
+            _canMove = false;
+            _canDash = false;
+
+            _currentVelocity.x = 18f * _facingDirection;
+            _currentGravityModifier = 0;
+
+            // Animate
+            bodyAnimator.SetTrigger(dashAnimationVar);
+            
+            StartCoroutine(StopDash());
         }
 
-        private void CheckForDoubleJump()
+        private IEnumerator StopDash()
         {
+            var elapse = 0f;
             
+            while (elapse < 0.25f)
+            {
+                elapse += Time.deltaTime;
+                
+                CheckFaceCollisions();
+                if (_playerCollisions.leftCollision || _playerCollisions.rightCollision)
+                    _currentVelocity.x = 0;
+                
+                yield return new WaitForEndOfFrame();
+            }
+
+            _canMove = true;
+            _currentVelocity.x = _playerInput.x * moveVelocity;
+            _currentGravityModifier = gravityModifier;
         }
         
-        
+        private void DashFinished()
+        {
+            if(Grounded) 
+                _canDash = true;
+            _canMove = true;
+        }
+
+        // -------------
+        // Hit
+        // -------------
+        public void GetHit()
+        {
+            if (_canGetHit)
+                StartCoroutine(CantGetHit(0.2f));
+        }
+
+        private IEnumerator CantGetHit(float time)
+        {
+            var elapsedTime = 0f;
+            _canGetHit = false;
+            while (elapsedTime < time)
+            {
+                elapsedTime += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+        }
         
         // -------------
         // Facing
@@ -280,6 +382,7 @@ namespace Code.Hero
             // Movement Animations
             bodyAnimator.SetFloat(movementAnimationVar, Mathf.Abs(_playerInput.x));
             bodyAnimator.SetBool(runningAnimationVar, Mathf.Abs(_playerInput.x) > 0.5f);
+            bodyAnimator.SetFloat(fallAnimationVar, _currentVelocity.y);
         }
 
         private void JumpAnimation() => bodyAnimator.SetTrigger(jumpAnimationVar);
@@ -291,21 +394,29 @@ namespace Code.Hero
         // -------------
         private void Move(Vector2 delta)
         {
-            // Clamp X if colliding with walls
-            if (_playerCollisions.leftCollision || _playerCollisions.rightCollision)
-                delta.x = 0f;
-
-            // Don't let player break ceil or ground collisions 
-            if (!Grounded)
+            if (_canMove)
             {
-                ClampTopDistance(ref delta);
-                ClampOnFalling(ref delta);
+                // Clamp X if colliding with walls
+                if (_playerCollisions.leftCollision || _playerCollisions.rightCollision)
+                    delta.x = 0f;
+                // Don't let player break ceil or ground collisions 
+                if (!Grounded)
+                {
+                    ClampTopDistance(ref delta);
+                    ClampOnFalling(ref delta);
+                }
+                // Move clamped delta
+                transform.Translate(delta);
             }
-
-            // Move clamped delta
-            transform.Translate(delta);
         }
         
+        // --------------------------
+        // Checkpoint
+        // --------------------------
+        public void BackToCheckpoint()
+        {
+            transform.position = lastCheckpoint;
+        }
         
         // --------------------------
         // CUSTOM PHYSICS
@@ -355,11 +466,17 @@ namespace Code.Hero
         private void CheckGrounded()
         {
             var info = MultiRayEmiter(_origins.bottomLeft, Vector2.down, 0.05f, whatIsGround);
+            if (info.hasHit.All(a => a))
+                lastCheckpoint = transform.position;
+                
             Grounded = info.hasHit.Contains(true);
+            DistanceToGround = info.hitDistances.Min();
             _playerCollisions.groundCollision = Grounded;
             
         }
 
+                
+        // TODO: REHACER CLAMP X
         private void CheckFaceCollisions()
         {
             var faceOrigin = _facingDirection > 0 ? _origins.bottomRight : _origins.bottomLeft;
@@ -374,6 +491,7 @@ namespace Code.Hero
                 _playerCollisions.rightCollision = (int)_facingDirection == 1;
             }
         }
+
         
         private void CheckCeilCollision()
         {
@@ -400,5 +518,6 @@ namespace Code.Hero
             if (groundInfo.hasHit.Contains(true))
                 delta.y = Mathf.Clamp(delta.y, -groundInfo.hitDistances.Min(), float.MaxValue);
         }
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Cinemachine;
-using Code.Camera;
+using Code.CameraSystem;
 using Code.Interfaces;
 
 namespace Code.Services

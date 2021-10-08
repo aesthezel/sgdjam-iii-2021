@@ -11,8 +11,7 @@ namespace Code.World
         {
             if (other.CompareTag("Player"))
             {
-                other.GetComponent<PlayerController>().BackToCheckpoint();
-                
+                other.transform.parent.GetComponent<PlayerController2D>().BackToCheckpoint();
             }
         }
     }

@@ -1,5 +1,5 @@
 ﻿using System;
-using Code.Camera;
+using Code.CameraSystem;
 using Code.Data;
 using Code.Services;
 using UnityEngine;
