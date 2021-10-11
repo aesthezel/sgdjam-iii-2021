@@ -5,8 +5,11 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Testing/Level 1 -Backup - Errores - Layout.unity
     guid: 56340a549d9d46a418c0eff29e5e22ab
+  - enabled: 1
+    path: Assets/Scenes/Testing/Player Controller Test.unity
+    guid: 8795ab00a57c46b40b1f15881e39db5e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 17889a1805b0a804ba279991aec15298, type: 2}

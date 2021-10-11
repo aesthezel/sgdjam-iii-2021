@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f891f3735e4e35a2fe991f8e34ff73, type: 3}
   m_Name: KeyEvent
   m_EditorClassIdentifier: 
-  value: 1
-  startValue: 1
+  value: 0
+  startValue: 0

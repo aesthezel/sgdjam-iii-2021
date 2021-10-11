@@ -1,7 +1,10 @@
 using System;
+using System.Numerics;
 using Code.Hero;
 using Unity.Mathematics;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Code.CameraSystem
 {
@@ -55,23 +58,31 @@ namespace Code.CameraSystem
             // EN Y
             if (controller.CurrentVelocity.y > 0 || controller.Grounded)
                 destiny.y += groundedY;
-           // if (controller.CurrentVelocity.y < -20f)
-            //    destiny.y -= jumpingY;
-            
+
             // EN X
-            if (Mathf.Abs(controller.CurrentVelocity.x) > 0)
-                destiny.x += (movingX * Mathf.Abs(controller.CurrentVelocity.x)) * controller.FacingDirection;
-            else
-                destiny.x += standX * controller.FacingDirection;
-        
+            var velDir = Mathf.Sign(controller.CurrentVelocity.x);
+            if (!controller.Dashing)
+            {
+                if (Mathf.Abs(controller.CurrentVelocity.x) > 0)
+                    destiny.x += (movingX * Mathf.Abs(controller.CurrentVelocity.x)) * velDir;
+                else
+                    destiny.x += standX * velDir * controller.FacingDirection;
+            }
+
             // Tuneado
             destiny += new Vector3(Tuning.x, Tuning.y , 0);
             
             // Lerp la posicion
-            var newPos = Vector3.Lerp(transform.position, destiny, Time.deltaTime * followVelocity);
-            newPos.z = transform.position.z;
+            Vector3 newPos;
+            var yVel = Mathf.Abs(controller.CurrentVelocity.y);
             
-
+            // Si le siguieramos muy lento se sale de camara
+            if(yVel > 6)
+                newPos = Vector3.Lerp(transform.position, destiny, Time.deltaTime * yVel);
+            else
+                newPos = Vector3.Lerp(transform.position, destiny, Time.deltaTime * followVelocity);
+    
+            newPos.z = transform.position.z;
             transform.position = newPos;
         }
     }

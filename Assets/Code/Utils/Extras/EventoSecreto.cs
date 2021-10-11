@@ -1,29 +1,39 @@
-using System;
-using Code.CameraSystem;
-using Code.Services;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class EventoSecreto : MonoBehaviour
 {
-    [SerializeField] private float OrthoShize;
-    private CameraEffects effects;
-    private MainCameraService cam;
-    
-    private void Start()
-    {
-        cam = ServiceLocator.Instance.ObtainService<MainCameraService>();
-        effects = ServiceLocator.Instance.ObtainService<CameraEffects>();
-    }
+    [SerializeField] private  GameObject mapToDeactivate;
+    [SerializeField] private  GameObject mapToActivate;
+
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
-            effects.DoOrtoSize(OrthoShize, 1f, Ease.Linear);
+        {
+            mapToActivate.SetActive(true);
+            StartCoroutine(Disappear());
+        }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private IEnumerator Disappear()
     {
-        if (other.CompareTag("Player"))
-            effects.DoOrtoSize(3f, 0.3f, Ease.Linear);
+        var maps = mapToDeactivate.GetComponentsInChildren<Tilemap>();
+        var currentAlpha = 1f;
+        while (currentAlpha > 0)
+        {
+            currentAlpha -= Time.deltaTime * 2f;
+            foreach (var tilemap in maps)
+            {
+                var color = tilemap.color;
+                tilemap.color = new Color(color.r, color.g, color.b, currentAlpha);
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+        
+        mapToDeactivate.SetActive(false);
     }
 }

@@ -19,3 +19,9 @@ MonoBehaviour:
   - ID: FireBallDestroyEffect
     prefab: {fileID: 115760, guid: 409db931d4cd81c4f9a1e17589a2ca22, type: 3}
     numInstances: 20
+  - ID: Respawn
+    prefab: {fileID: 129404, guid: 7c5a98bca19e0ac4795f66e24920cf7d, type: 3}
+    numInstances: 1
+  - ID: HighJump
+    prefab: {fileID: 171188, guid: a6b66c55641a7704da9de37735da9b04, type: 3}
+    numInstances: 1

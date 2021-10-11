@@ -7,25 +7,25 @@ TextureImporter:
     second: UI_Lives_spritesheet0
   - first:
       213: 7739233400202253206
-    second: Dash
+    second: UI_Lives_spritesheet_0
   - first:
       213: 7244265979854757700
-    second: Jump
+    second: UI_Lives_spritesheet_1
   - first:
       213: 2976914122870573178
-    second: Down
+    second: UI_Lives_spritesheet_2
   - first:
       213: 8393675944769881364
-    second: Up
+    second: UI_Lives_spritesheet_3
   - first:
       213: 2313760881001813034
-    second: Right
+    second: UI_Lives_spritesheet_4
   - first:
       213: 3084644286134379723
-    second: Left
+    second: UI_Lives_spritesheet_5
   - first:
       213: 7490569841781597819
-    second: BaseUI
+    second: UI_Lives_spritesheet_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,7 +115,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dash
+      name: UI_Lives_spritesheet_0
       rect:
         serializedVersion: 2
         x: 12
@@ -123,7 +123,7 @@ TextureImporter:
         width: 25
         height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -136,7 +136,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jump
+      name: UI_Lives_spritesheet_1
       rect:
         serializedVersion: 2
         x: 50
@@ -144,7 +144,7 @@ TextureImporter:
         width: 15
         height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -157,7 +157,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Down
+      name: UI_Lives_spritesheet_2
       rect:
         serializedVersion: 2
         x: 84
@@ -165,7 +165,7 @@ TextureImporter:
         width: 17
         height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -178,7 +178,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Up
+      name: UI_Lives_spritesheet_3
       rect:
         serializedVersion: 2
         x: 108
@@ -186,7 +186,7 @@ TextureImporter:
         width: 17
         height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -199,7 +199,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Right
+      name: UI_Lives_spritesheet_4
       rect:
         serializedVersion: 2
         x: 132
@@ -207,7 +207,7 @@ TextureImporter:
         width: 15
         height: 17
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -220,7 +220,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Left
+      name: UI_Lives_spritesheet_5
       rect:
         serializedVersion: 2
         x: 155
@@ -228,7 +228,7 @@ TextureImporter:
         width: 15
         height: 17
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -241,7 +241,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseUI
+      name: UI_Lives_spritesheet_6
       rect:
         serializedVersion: 2
         x: 1
@@ -249,7 +249,7 @@ TextureImporter:
         width: 380
         height: 38
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

@@ -32,7 +32,7 @@ namespace Code.Utils
         private LayerMask delayTriggerers;
         
         private CameraEffects _effects;
-        private PlayerController _controller;
+        private PlayerController2D _controller;
         private InputMapper _mapper;
 
         private void Start()
@@ -64,7 +64,7 @@ namespace Code.Utils
             actions.start += TimeDelay;
             actions.ok += f => _effects.DoLookAhead(
                 lookAheadDistance.Value,
-                _controller.FacingRight ? 1 : -1,
+                (int)_controller.FacingDirection,
                 sustainTime.Value,
                 inTime.Value,
                 outTime.Value);

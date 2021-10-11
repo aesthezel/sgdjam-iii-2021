@@ -17,7 +17,7 @@ namespace Code.Utils.Environment
         
         private void Start()
         {
-            effects = ServiceLocator.Instance.ObtainService<CameraEffects>();
+            //effects = ServiceLocator.Instance.ObtainService<CameraEffects>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -26,8 +26,8 @@ namespace Code.Utils.Environment
             {
                 myrenderer.sortingOrder = -1;
                 events?.Invoke();
-                transform.DOMoveY(transform.position.y + 1, 3f).onComplete += () => endEvents?.Invoke();
-                effects.DoShake(0.05f, 1f);
+                transform.DOMoveY(transform.position.y + 4, 3f).onComplete += () => endEvents?.Invoke();
+                //effects.DoShake(0.05f, 1f);
             }
         }
     }

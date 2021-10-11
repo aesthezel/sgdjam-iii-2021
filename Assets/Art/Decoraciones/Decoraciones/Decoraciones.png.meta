@@ -7,52 +7,52 @@ TextureImporter:
     second: Decoraciones0
   - first:
       213: 4473196181089523693
-    second: Fondo antorcha
+    second: Decoraciones_0
   - first:
       213: -6265045453541884700
-    second: Antorcha f1
+    second: Decoraciones_1
   - first:
       213: -8074081495485307042
-    second: Antorcha f2
+    second: Decoraciones_2
   - first:
       213: 1903983518200481482
-    second: Llave
+    second: Decoraciones_3
   - first:
       213: -1279699384981169346
-    second: DecoTierra 01
+    second: Decoraciones_4
   - first:
       213: 4618267925945511539
-    second: DecoTierra 02
+    second: Decoraciones_5
   - first:
       213: -8603213190447726764
-    second: DecoTierra 03
+    second: Decoraciones_6
   - first:
       213: -6117629913881912806
-    second: DecoTierra 04
+    second: Decoraciones_7
   - first:
       213: -8357050288758230425
-    second: DecoTierra 05
+    second: Decoraciones_8
   - first:
       213: -5410595515378603935
-    second: Soporte
+    second: Decoraciones_9
   - first:
       213: -3645240870879388065
-    second: Columna Front Left
+    second: Decoraciones_10
   - first:
       213: -2754502253078306277
-    second: Columna Back Left
+    second: Decoraciones_11
   - first:
       213: -3304589812570277312
-    second: Columna Back Right
+    second: Decoraciones_12
   - first:
       213: 592872083584965017
-    second: Columna Front Right
+    second: Decoraciones_13
   - first:
       213: -63529610108977611
-    second: Puerta Maciza
+    second: Decoraciones_14
   - first:
       213: -714337920119910767
-    second: Grabados Pared
+    second: Decoraciones_15
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -142,7 +142,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fondo antorcha
+      name: Decoraciones_0
       rect:
         serializedVersion: 2
         x: 17
@@ -150,7 +150,7 @@ TextureImporter:
         width: 52
         height: 49
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -163,7 +163,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Antorcha f1
+      name: Decoraciones_1
       rect:
         serializedVersion: 2
         x: 83
@@ -171,7 +171,7 @@ TextureImporter:
         width: 14
         height: 30
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -184,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Antorcha f2
+      name: Decoraciones_2
       rect:
         serializedVersion: 2
         x: 105
@@ -192,7 +192,7 @@ TextureImporter:
         width: 14
         height: 30
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,7 +205,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Llave
+      name: Decoraciones_3
       rect:
         serializedVersion: 2
         x: 143
@@ -213,7 +213,7 @@ TextureImporter:
         width: 32
         height: 14
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -226,7 +226,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DecoTierra 01
+      name: Decoraciones_4
       rect:
         serializedVersion: 2
         x: 208
@@ -234,7 +234,7 @@ TextureImporter:
         width: 24
         height: 35
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,7 +247,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DecoTierra 02
+      name: Decoraciones_5
       rect:
         serializedVersion: 2
         x: 252
@@ -255,7 +255,7 @@ TextureImporter:
         width: 32
         height: 43
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -268,7 +268,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DecoTierra 03
+      name: Decoraciones_6
       rect:
         serializedVersion: 2
         x: 304
@@ -276,7 +276,7 @@ TextureImporter:
         width: 29
         height: 30
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -289,7 +289,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DecoTierra 04
+      name: Decoraciones_7
       rect:
         serializedVersion: 2
         x: 360
@@ -297,7 +297,7 @@ TextureImporter:
         width: 56
         height: 25
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -310,7 +310,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DecoTierra 05
+      name: Decoraciones_8
       rect:
         serializedVersion: 2
         x: 444
@@ -318,7 +318,7 @@ TextureImporter:
         width: 31
         height: 48
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -331,7 +331,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Soporte
+      name: Decoraciones_9
       rect:
         serializedVersion: 2
         x: 510
@@ -339,7 +339,7 @@ TextureImporter:
         width: 36
         height: 10
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -352,7 +352,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Columna Front Left
+      name: Decoraciones_10
       rect:
         serializedVersion: 2
         x: 7
@@ -360,7 +360,7 @@ TextureImporter:
         width: 125
         height: 360
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -373,7 +373,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Columna Back Left
+      name: Decoraciones_11
       rect:
         serializedVersion: 2
         x: 163
@@ -381,7 +381,7 @@ TextureImporter:
         width: 60
         height: 294
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -394,7 +394,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Columna Back Right
+      name: Decoraciones_12
       rect:
         serializedVersion: 2
         x: 291
@@ -402,7 +402,7 @@ TextureImporter:
         width: 59
         height: 293
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -415,7 +415,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Columna Front Right
+      name: Decoraciones_13
       rect:
         serializedVersion: 2
         x: 365
@@ -423,7 +423,7 @@ TextureImporter:
         width: 125
         height: 361
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -436,7 +436,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Puerta Maciza
+      name: Decoraciones_14
       rect:
         serializedVersion: 2
         x: 514
@@ -444,7 +444,7 @@ TextureImporter:
         width: 32
         height: 96
       alignment: 9
-      pivot: {x: 0.5000019, y: 0.9984188}
+      pivot: {x: 0.47869682, y: 0.9899502}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -457,15 +457,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grabados Pared
+      name: Decoraciones_15
       rect:
         serializedVersion: 2
-        x: 23
-        y: 22
-        width: 155
-        height: 108
+        x: 16
+        y: 14
+        width: 170
+        height: 127
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

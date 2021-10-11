@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using Code.Data;
+using Code.Services;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Assertions;
@@ -29,7 +30,9 @@ namespace Code.Hero
         [SerializeField] private int faceCheckers = 4;
         [BoxGroup("Physics")]
         [SerializeField] private int groundCheckers = 4;
-
+        [BoxGroup("Physics")]
+        [SerializeField] private Collider2D hitCollider;
+                
         
         [BoxGroup("Jumping", centerLabel: true)]
         [SerializeField] private float jumpVel;
@@ -55,7 +58,7 @@ namespace Code.Hero
                                         fallAnimationVar;
         
         [BoxGroup("Checkpoint")]
-        [SerializeField] private LayerMask whatIsNotCheckpoint;
+        [SerializeField] private LayerMask whatIsCheckpoint;
         
         // Movement
         private Vector2 _currentVelocity;
@@ -93,13 +96,10 @@ namespace Code.Hero
 
         private bool _jumping;
         private bool _jumpCompleted;
-        private bool _coyoteCheck;
         private bool _canDash;
-        private Vector3 _lastFullyOnGround;
-        private Vector2 _playerOneMovement;
-        private Vector2 _playerTwoMovement;
         private Vector2 _playerInput;
-
+        private bool _jumpStrike;
+        private MainPoolerService pooler;
 
         // -------------------
         // Properties
@@ -128,6 +128,17 @@ namespace Code.Hero
                     _currentVelocity.y = _currentVelocity.y < 0 ? 0 : _currentVelocity.y;
                     ResetJumpValues();
                     _canDash = true;
+                    // Set the player on exact ground position
+                    var info = MultiRayEmiter(_origins.bottomLeft, Vector2.down, 0.1f, whatIsGround);
+                    transform.Translate(Vector2.down * info.hitDistances.Min());
+                    if (_jumpStrike)
+                    {
+                        var jumpEffect = pooler.Pooler.GetByID("HighJump");
+                        jumpEffect.transform.position =
+                            _myCollider.bounds.center + Vector3.down * _myCollider.bounds.extents.y;
+                        _jumpStrike = false;
+                        StartCoroutine(DeactivateDelay(jumpEffect, 0.5f));
+                    }
                 }
                 
                 _grounded = value;
@@ -140,10 +151,10 @@ namespace Code.Hero
         public PlayerCollisions PlayerCollisions => _playerCollisions;
         public Vector2 CurrentVelocity => _currentVelocity;
         public float FacingDirection => _facingDirection;
-        public bool Dashing => !_canDash;
+        public bool Dashing { get; private set; }
         
         public float DistanceToGround { get; private set; }
-        public Vector2 lastCheckpoint { get; private set; }
+        public Vector2 LastCheckpoint { get; private set; }
 
         // -------------------
         // UNITY METHODS
@@ -158,6 +169,7 @@ namespace Code.Hero
 
         private void Start()
         {
+            pooler = ServiceLocator.Instance.ObtainService<MainPoolerService>();
             // At least we need 2 checkers for collision detection
             groundCheckers = Mathf.Clamp(groundCheckers, 2, int.MaxValue);
             faceCheckers = Mathf.Clamp(faceCheckers, 2, int.MaxValue);
@@ -176,7 +188,8 @@ namespace Code.Hero
 
         private void Update()
         {
-            SetPlayerInput();
+            if(_canMove)
+                SetPlayerInput();
             
             UpdateRayOrigins();
             
@@ -188,7 +201,7 @@ namespace Code.Hero
                 ApplyGravity();
             }
             
-            CheckFaceCollisions();
+            //CheckFaceCollisions();
             
             // Move the amount computed by our physics
             Move(_currentVelocity * Time.deltaTime);
@@ -206,13 +219,10 @@ namespace Code.Hero
         // -------------
         private void UpdateMindInput(int mindId, Vector2 inputVector)
         {
-            if (_canMove)
-            {
-                if (mindId == 0)
-                    PlayerOneInput = inputVector;
-                else if (mindId == 1)
-                    PlayerTwoInput = inputVector;
-            }
+            if (mindId == 0)
+                PlayerOneInput = inputVector;
+            else if (mindId == 1)
+                PlayerTwoInput = inputVector;
         }
         
         private void SetPlayerInput()
@@ -249,7 +259,7 @@ namespace Code.Hero
             
             dashEvents.checker += CheckDash;
             dashEvents.ok += Dash;
-            dashEvents.finished += DashFinished;
+            //dashEvents.finished += DashFinished;
         }
         
         
@@ -304,9 +314,9 @@ namespace Code.Hero
         {
             _canMove = false;
             _canDash = false;
-
-            _currentVelocity.x = 18f * _facingDirection;
-            _currentGravityModifier = 0;
+            Dashing = true;
+            _currentVelocity = new Vector2(18f * _facingDirection, 0);
+            hitCollider.enabled = false;
 
             // Animate
             bodyAnimator.SetTrigger(dashAnimationVar);
@@ -322,23 +332,27 @@ namespace Code.Hero
             {
                 elapse += Time.deltaTime;
                 
-                CheckFaceCollisions();
+                _currentGravityModifier = 0;
+                
                 if (_playerCollisions.leftCollision || _playerCollisions.rightCollision)
                     _currentVelocity.x = 0;
                 
                 yield return new WaitForEndOfFrame();
             }
 
-            _canMove = true;
-            _currentVelocity.x = _playerInput.x * moveVelocity;
-            _currentGravityModifier = gravityModifier;
+            DashFinished();
         }
         
         private void DashFinished()
         {
+            hitCollider.enabled = true;
             if(Grounded) 
                 _canDash = true;
             _canMove = true;
+            _currentVelocity.x = _playerInput.x * moveVelocity;
+            _currentGravityModifier = gravityModifier;
+            Dashing = false;
+
         }
 
         // -------------
@@ -347,13 +361,16 @@ namespace Code.Hero
         public void GetHit()
         {
             if (_canGetHit)
+            {
                 StartCoroutine(CantGetHit(0.2f));
+            }
         }
 
         private IEnumerator CantGetHit(float time)
         {
             var elapsedTime = 0f;
             _canGetHit = false;
+            bodyAnimator.SetTrigger(hitAnimationVar);
             while (elapsedTime < time)
             {
                 elapsedTime += Time.deltaTime;
@@ -386,6 +403,7 @@ namespace Code.Hero
         }
 
         private void JumpAnimation() => bodyAnimator.SetTrigger(jumpAnimationVar);
+        
         private void GroundedAnimation() => bodyAnimator.SetBool(groundedAnimationVar, Grounded);
         
         
@@ -394,20 +412,42 @@ namespace Code.Hero
         // -------------
         private void Move(Vector2 delta)
         {
-            if (_canMove)
+            // Clamp X if colliding with walls
+            if (_playerCollisions.leftCollision || _playerCollisions.rightCollision)
+                delta.x = 0f;
+            
+            // Don't let player break ceil or ground collisions 
+            if (!Grounded)
             {
-                // Clamp X if colliding with walls
-                if (_playerCollisions.leftCollision || _playerCollisions.rightCollision)
-                    delta.x = 0f;
-                // Don't let player break ceil or ground collisions 
-                if (!Grounded)
-                {
-                    ClampTopDistance(ref delta);
-                    ClampOnFalling(ref delta);
-                }
-                // Move clamped delta
-                transform.Translate(delta);
+                ClampTopDistance(ref delta);
             }
+            
+            ClampOnFalling(ref delta);
+            ClampFaceDirection(ref delta);
+            
+            // Move clamped delta
+            transform.Translate(delta);
+        }
+
+        public void PushBack(float vel)
+        {
+            _canMove = false;
+            _currentVelocity.x = vel * FacingDirection * -1;
+            StartCoroutine(PushCoroutine());
+        }
+
+        private IEnumerator PushCoroutine()
+        {
+            var elapsed = 0f;
+            
+            while (elapsed < 0.5f)
+            {
+                elapsed += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+            
+            _currentVelocity.x = _playerInput.x * moveVelocity;
+            _canMove = true;
         }
         
         // --------------------------
@@ -415,7 +455,26 @@ namespace Code.Hero
         // --------------------------
         public void BackToCheckpoint()
         {
-            transform.position = lastCheckpoint;
+            DistanceToGround = 0;
+            _currentVelocity = Vector2.zero;
+            _jumpStrike = false;
+            transform.position = LastCheckpoint;
+            var effect = ServiceLocator.Instance.ObtainService<MainPoolerService>().Pooler.GetByID("Respawn");
+            effect.transform.position = LastCheckpoint;
+            StartCoroutine(DeactivateDelay(effect, 0.2f)); 
+        }
+
+        private IEnumerator DeactivateDelay(GameObject go, float time)
+        {
+            float elapsed = 0;
+            
+            while (elapsed < time)
+            {
+                elapsed += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+            
+            go.SetActive(false);
         }
         
         // --------------------------
@@ -466,33 +525,19 @@ namespace Code.Hero
         private void CheckGrounded()
         {
             var info = MultiRayEmiter(_origins.bottomLeft, Vector2.down, 0.05f, whatIsGround);
-            if (info.hasHit.All(a => a))
-                lastCheckpoint = transform.position;
-                
             Grounded = info.hasHit.Contains(true);
-            DistanceToGround = info.hitDistances.Min();
             _playerCollisions.groundCollision = Grounded;
-            
+            CheckPointUpdate();
         }
-
-                
-        // TODO: REHACER CLAMP X
-        private void CheckFaceCollisions()
-        {
-            var faceOrigin = _facingDirection > 0 ? _origins.bottomRight : _origins.bottomLeft;
-            var faceDirection = Vector2.right * _facingDirection;
-            var faceHits = MultiRayEmiter(faceOrigin, faceDirection, 0.05f, whatIsWall);
-
-            _playerCollisions.ResetFaceCollisions();
-            
-            if (faceHits.hasHit.Contains(true))
-            {
-                _playerCollisions.leftCollision = (int)_facingDirection == -1;
-                _playerCollisions.rightCollision = (int)_facingDirection == 1;
-            }
-        }
-
         
+        private void CheckPointUpdate()
+        {
+            var info = MultiRayEmiter(_origins.bottomLeft, Vector2.down, 0.05f, whatIsCheckpoint);
+            
+            if (info.hasHit.All(a => a))
+                LastCheckpoint = transform.position;
+        }
+
         private void CheckCeilCollision()
         {
             var topInfo = MultiRayEmiter(_origins.topLeft, Vector2.up, 0.05f, whatIsWall);
@@ -515,9 +560,39 @@ namespace Code.Hero
         {
             var length = Mathf.Abs(_currentVelocity.y);
             var groundInfo = MultiRayEmiter(_origins.bottomLeft, Vector2.down, length, whatIsGround);
+            
             if (groundInfo.hasHit.Contains(true))
+            {
                 delta.y = Mathf.Clamp(delta.y, -groundInfo.hitDistances.Min(), float.MaxValue);
+                DistanceToGround = groundInfo.hitDistances.Min();
+                if (DistanceToGround > 7f)
+                {
+                    _jumpStrike = true;
+                }
+            }
         }
+        
+        private void ClampFaceDirection(ref Vector2 delta)
+        {
+            var faceOrigin = _facingDirection > 0 ? _origins.bottomRight : _origins.bottomLeft;
+            var faceDirection = Vector2.right * _facingDirection;
+            var faceHits = MultiRayEmiter(faceOrigin, faceDirection, Mathf.Abs(_currentVelocity.x), whatIsWall);
 
+            if (faceHits.hasHit.Contains(true))
+            {
+                var dist = faceHits.hitDistances.Min();
+                if (dist <= 0.05)
+                {
+                    _playerCollisions.leftCollision = (int)_facingDirection == -1;
+                    _playerCollisions.rightCollision = (int)_facingDirection == 1;
+                }
+
+                delta.x = Mathf.Clamp(delta.x, -dist, dist);
+            }
+            else
+            {
+                _playerCollisions.ResetFaceCollisions();
+            }
+        }
     }
 }

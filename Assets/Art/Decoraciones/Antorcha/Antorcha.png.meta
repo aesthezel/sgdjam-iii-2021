@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: 4520102098571276940
     second: Antorcha_1
+  - first:
+      213: 7859916497784610415
+    second: Antorcha0
+  - first:
+      213: 291736848498395585
+    second: Antorcha1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -52,7 +58,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 40
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,43 +103,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Antorcha_0
+      name: Antorcha0
       rect:
         serializedVersion: 2
         x: 1
         y: 1
         width: 14
-        height: 30
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: bdc02b350e5e0e710800000000000000
-      internalID: 1720627809295142107
+      spriteID: f6e1fae3968041d60800000000000000
+      internalID: 7859916497784610415
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Antorcha_1
+      name: Antorcha1
       rect:
         serializedVersion: 2
         x: 17
         y: 1
         width: 14
-        height: 30
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: c82b6ddf8e0aabe30800000000000000
-      internalID: 4520102098571276940
+      spriteID: 1c983a63e157c0400800000000000000
+      internalID: 291736848498395585
       vertices: []
       indices: 
       edges: []

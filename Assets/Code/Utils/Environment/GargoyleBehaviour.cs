@@ -29,7 +29,7 @@ namespace Code.Utils.Environment
                 go.transform.position = _shootPoint.position;
                 var dir = transform.right;
                 if (transform.localScale.x < 0) dir = transform.right; 
-                go.GetComponent<FireBall>().Direction = transform.right;
+                go.GetComponent<FireBall>().Direction = new Vector2(transform.localScale.x, 0);
                 yield return new WaitForSeconds(cooldown);
             }
         }

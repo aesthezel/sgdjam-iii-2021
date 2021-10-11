@@ -4,16 +4,22 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -8283504241884404996
-    second: Estalactita
+    second: Enemigos_0
   - first:
       213: -7698652293376088270
-    second: Pinchos x4
+    second: Enemigos_1
   - first:
       213: -3315769422710494199
-    second: Gargola
+    second: Enemigos_5
   - first:
       213: 120601881286041492
     second: Pinchos x1
+  - first:
+      213: 9018316414846246565
+    second: Enemigos0
+  - first:
+      213: 8181320820042584514
+    second: Enemigos_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -103,15 +109,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Estalactita
+      name: Enemigos_0
       rect:
         serializedVersion: 2
         x: 16
         y: 9
         width: 35
         height: 63
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 9
+      pivot: {x: 0.5105543, y: 1.0003483}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -124,15 +130,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pinchos x4
+      name: Enemigos_1
       rect:
         serializedVersion: 2
         x: 74
         y: 10
         width: 48
         height: 58
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.5167909, y: 0.009592599}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -145,15 +151,36 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gargola
+      name: Enemigos_4
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 9
+        width: 12
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c1552870f3e98170800000000000000
+      internalID: 8181320820042584514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemigos_5
       rect:
         serializedVersion: 2
         x: 158
         y: 20
         width: 41
         height: 35
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -161,27 +188,6 @@ TextureImporter:
       bones: []
       spriteID: 90c2d3a17450cf1d0800000000000000
       internalID: -3315769422710494199
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Pinchos x1
-      rect:
-        serializedVersion: 2
-        x: 123
-        y: 9
-        width: 12
-        height: 62
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 49f5c45a5c67ca100800000000000000
-      internalID: 120601881286041492
       vertices: []
       indices: 
       edges: []

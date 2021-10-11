@@ -1955,8 +1955,8 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -17, y: 12}
-        - {x: -17, y: -20}
+      - - {x: -16, y: 12}
+        - {x: -16, y: -20}
         - {x: 20, y: -20}
         - {x: 20, y: 12}
       tessellationDetail: 0

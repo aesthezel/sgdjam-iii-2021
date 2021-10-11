@@ -15,7 +15,7 @@ namespace Code.Utils.Environment
                 if (hit.collider.CompareTag("Player"))
                 {
                     _falling = true;
-                    GetComponent<Rigidbody2D>().gravityScale = 1.5f;
+                    GetComponent<Rigidbody2D>().gravityScale = 2f;
                 }
             }
         }
