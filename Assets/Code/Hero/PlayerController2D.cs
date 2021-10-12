@@ -124,13 +124,20 @@ namespace Code.Hero
                 // If player touches the ground...
                 if (!_grounded && value)
                 {
-                    _currentGravityModifier = gravityModifier;
-                    _currentVelocity.y = _currentVelocity.y < 0 ? 0 : _currentVelocity.y;
                     ResetJumpValues();
+                    
                     _canDash = true;
+                    
                     // Set the player on exact ground position
-                    var info = MultiRayEmiter(_origins.bottomLeft, Vector2.down, 0.1f, whatIsGround);
-                    transform.Translate(Vector2.down * info.hitDistances.Min());
+                    var info = MultiRayEmiter(_origins.bottomLeft, Vector2.down, 0.08f, whatIsGround);
+
+                    if (info.hasHit.Contains(true))
+                    {
+                        Debug.Log(info.hitDistances.Min());
+                        //Debug.Break();
+                        transform.Translate(Vector2.down * info.hitDistances.Min());
+                    }
+
                     if (_jumpStrike)
                     {
                         var jumpEffect = pooler.Pooler.GetByID("HighJump");
@@ -139,6 +146,9 @@ namespace Code.Hero
                         _jumpStrike = false;
                         StartCoroutine(DeactivateDelay(jumpEffect, 0.5f));
                     }
+                    
+                    _currentGravityModifier = gravityModifier;
+                    _currentVelocity.y = _currentVelocity.y < 0 ? 0 : _currentVelocity.y;
                 }
                 
                 _grounded = value;
@@ -418,9 +428,7 @@ namespace Code.Hero
             
             // Don't let player break ceil or ground collisions 
             if (!Grounded)
-            {
                 ClampTopDistance(ref delta);
-            }
             
             ClampOnFalling(ref delta);
             ClampFaceDirection(ref delta);
@@ -527,10 +535,10 @@ namespace Code.Hero
             var info = MultiRayEmiter(_origins.bottomLeft, Vector2.down, 0.05f, whatIsGround);
             Grounded = info.hasHit.Contains(true);
             _playerCollisions.groundCollision = Grounded;
-            CheckPointUpdate();
+            CheckpointUpdate();
         }
         
-        private void CheckPointUpdate()
+        private void CheckpointUpdate()
         {
             var info = MultiRayEmiter(_origins.bottomLeft, Vector2.down, 0.05f, whatIsCheckpoint);
             
@@ -564,11 +572,11 @@ namespace Code.Hero
             if (groundInfo.hasHit.Contains(true))
             {
                 delta.y = Mathf.Clamp(delta.y, -groundInfo.hitDistances.Min(), float.MaxValue);
+                
                 DistanceToGround = groundInfo.hitDistances.Min();
+
                 if (DistanceToGround > 7f)
-                {
                     _jumpStrike = true;
-                }
             }
         }
         

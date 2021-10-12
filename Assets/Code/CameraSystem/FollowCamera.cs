@@ -56,8 +56,7 @@ namespace Code.CameraSystem
         {
             var destiny = target.position;
             // EN Y
-            if (controller.CurrentVelocity.y > 0 || controller.Grounded)
-                destiny.y += groundedY;
+            destiny.y += groundedY;
 
             // EN X
             var velDir = Mathf.Sign(controller.CurrentVelocity.x);
@@ -74,11 +73,13 @@ namespace Code.CameraSystem
             
             // Lerp la posicion
             Vector3 newPos;
-            var yVel = Mathf.Abs(controller.CurrentVelocity.y);
+            var yVel = controller.CurrentVelocity.y;
             
             // Si le siguieramos muy lento se sale de camara
-            if(yVel > 6)
-                newPos = Vector3.Lerp(transform.position, destiny, Time.deltaTime * yVel);
+
+            if (yVel < -20)
+                newPos = Vector3.Lerp(transform.position, destiny, Time.deltaTime * yVel * -1);
+
             else
                 newPos = Vector3.Lerp(transform.position, destiny, Time.deltaTime * followVelocity);
     
