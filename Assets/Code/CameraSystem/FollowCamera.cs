@@ -1,25 +1,14 @@
-using System;
-using System.Numerics;
 using Code.Hero;
-using Unity.Mathematics;
 using UnityEngine;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
 
 namespace Code.CameraSystem
 {
     public class FollowCamera : ICameraItem
     {
-        // Que se quede dentro de un collider
-        // Sacar esquinas > lanzar rayo > calcular tope
-        // Seguir al player
-
-        [SerializeField] private Transform target; // SERVICELOCATOR 
+        [SerializeField] private Transform target; 
         [SerializeField] private float ortographicSize;
-        [SerializeField] private BoxCollider2D limits;
         [SerializeField] private float followVelocity;
         [SerializeField] private float groundedY;
-        [SerializeField] private float jumpingY;
         [SerializeField] private float movingX;
         [SerializeField] private float standX;
         

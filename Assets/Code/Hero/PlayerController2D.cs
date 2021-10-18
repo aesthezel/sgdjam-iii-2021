@@ -6,8 +6,6 @@ using Code.Services;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Assertions;
-using DG.Tweening;
-using UnityEngine.TextCore;
 
 namespace Code.Hero
 {
@@ -84,21 +82,15 @@ namespace Code.Hero
         private Vector2 _playerTwoInput;
         private bool _canMove = true;
         private bool _canGetHit = true;
-        
-        // NEW STUFF
-        // TODO: Movimiento 2 jugadores... DONE
-        // TODO: Jump ... DONE
-        // TODO: Double jump ... NOT IMPLEMENTED
-        // TODO: Dash ... DONE
-        // TODO: Checkpoint ... DONE
-        // TODO: Coyote time
-        
+        private Vector2 _playerInput;
 
+        // Jump
         private bool _jumping;
         private bool _jumpCompleted;
         private bool _canDash;
-        private Vector2 _playerInput;
         private bool _jumpStrike;
+        
+        // Pool
         private MainPoolerService pooler;
 
         // -------------------
@@ -171,7 +163,6 @@ namespace Code.Hero
         // -------------------
         private void Awake()
         {
-            // Preferably to use BoxCollider2D
             _myCollider = GetComponent<Collider2D>();
             _mapper = GetComponent<InputMapper>();
             _receiver = GetComponent<PlayerReceiver>();

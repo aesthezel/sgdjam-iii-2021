@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using Code.Services;
 using UnityEngine;
 using DG.Tweening;
@@ -18,7 +16,6 @@ namespace Code.CameraSystem
         [SerializeField] private float orthoGraphicSize;
         [SerializeField] private float orthoTime;
         
-        private BoxCollider2D _myCollider;
         private float _lastOrtoSize;
         private Camera _cam;
         private Tween _orthoTween;
@@ -26,7 +23,6 @@ namespace Code.CameraSystem
         
         private void Awake()
         {
-            _myCollider = GetComponent<BoxCollider2D>();
             _cam = theCamera.GetComponent<Camera>();
             player = ServiceLocator.Instance.ObtainService<PlayerService>();
         }
@@ -45,7 +41,6 @@ namespace Code.CameraSystem
                     _lastOrtoSize = _cam.orthographicSize;
                     if(_orthoTween != null)
                         _orthoTween.Kill();
-                    Debug.Log(orthoGraphicSize);
                     _orthoTween = _cam.DOOrthoSize(orthoGraphicSize, orthoTime);
                     _orthoTween.onComplete += () => _orthoTween = null;
                 }

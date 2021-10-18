@@ -1,10 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using Code.CameraSystem;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
-using Random = UnityEngine.Random;
-using Ease = Code.CameraSystem.Ease;
 
 namespace Code.Utils.Environment
 {

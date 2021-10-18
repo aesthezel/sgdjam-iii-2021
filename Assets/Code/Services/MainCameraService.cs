@@ -1,5 +1,4 @@
-﻿using System;
-using Code.Interfaces;
+﻿using Code.Interfaces;
 using UnityEngine;
 using Cinemachine;
 
