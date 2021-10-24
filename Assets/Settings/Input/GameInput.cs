@@ -318,7 +318,7 @@ namespace Settings.Input
             ""actions"": [
                 {
                     ""name"": ""Navigate"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""b8898112-2606-4dcc-a1d1-a01afb847235"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -326,7 +326,7 @@ namespace Settings.Input
                 },
                 {
                     ""name"": ""Submit"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""ce99eeb8-60e9-4b23-a668-f1205a69bcb9"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -334,7 +334,7 @@ namespace Settings.Input
                 },
                 {
                     ""name"": ""Cancel"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""8aa9793a-139f-4588-a6fa-881a2159ba80"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

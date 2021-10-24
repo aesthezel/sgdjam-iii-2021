@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ac83e7313936bfb4d9ab8ad00404f476
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - parentCanvas: {instanceID: 0}
+  - keyboardSprite: {instanceID: 0}
+  - gamepadSprite: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

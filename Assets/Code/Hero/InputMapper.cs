@@ -16,8 +16,6 @@ namespace Code.Hero
     public class InputMapper: MonoBehaviour
     {
         public Action<int, Vector2> onMove;
-        
-        private GameInput _master;
 
         // Dictionary containing the input names and events
         public Dictionary<string, ActionSet> ActionMapper { get; private set; }
@@ -26,10 +24,10 @@ namespace Code.Hero
         {
             ActionMapper = new Dictionary<string, ActionSet>();
             
-            _master = new GameInput();
-            var inputsNames = _master.asset.actionMaps[0].actions;
+            var master = new GameInput();
+            var inputNames = master.asset.actionMaps[0].actions; // TODO: Este [0] podria ser "Player" ??
             
-            foreach (var input in inputsNames)
+            foreach (var input in inputNames)
             {
                 ActionMapper.Add(input.name, new ActionSet());
             }

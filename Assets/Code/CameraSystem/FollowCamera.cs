@@ -1,3 +1,4 @@
+using System;
 using Code.Hero;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace Code.CameraSystem
         [SerializeField] private float groundedY;
         [SerializeField] private float movingX;
         [SerializeField] private float standX;
+        [SerializeField] private float xDeadZone;
+        [SerializeField] private float yDeadZone;
         
         private PlayerController2D controller;
         public Vector2 Tuning { get; set; }
@@ -44,17 +47,28 @@ namespace Code.CameraSystem
         private void FollowTarget()
         {
             var destiny = target.position;
+            
+            //if (Math.Abs(destiny.y - transform.position.y) < yDeadZone)
+            //    destiny.y = transform.position.y;
+
             // EN Y
             destiny.y += groundedY;
 
             // EN X
-            var velDir = Mathf.Sign(controller.CurrentVelocity.x);
-            if (!controller.Dashing)
+            if (Math.Abs(destiny.x - transform.position.x) > xDeadZone)
             {
-                if (Mathf.Abs(controller.CurrentVelocity.x) > 0)
-                    destiny.x += (movingX * Mathf.Abs(controller.CurrentVelocity.x)) * velDir;
-                else
-                    destiny.x += standX * velDir * controller.FacingDirection;
+                var velDir = Mathf.Sign(controller.CurrentVelocity.x);
+                if (!controller.Dashing)
+                {
+                    if (Mathf.Abs(controller.CurrentVelocity.x) > 0)
+                        destiny.x += (movingX * Mathf.Abs(controller.CurrentVelocity.x)) * velDir;
+                    else
+                        destiny.x += standX * velDir * controller.FacingDirection;
+                }
+            }
+            else
+            {
+                destiny.x = transform.position.x;
             }
 
             // Tuneado
@@ -65,7 +79,6 @@ namespace Code.CameraSystem
             var yVel = controller.CurrentVelocity.y;
             
             // Si le siguieramos muy lento se sale de camara
-
             if (yVel < -20)
                 newPos = Vector3.Lerp(transform.position, destiny, Time.deltaTime * yVel * -1);
 
@@ -74,6 +87,15 @@ namespace Code.CameraSystem
     
             newPos.z = transform.position.z;
             transform.position = newPos;
+        }
+
+        private void OnDrawGizmos()
+        {
+            var color = Color.cyan;
+            color.a = 0.2f;
+            Gizmos.color = color;
+            
+            Gizmos.DrawCube(transform.position, new Vector3(xDeadZone * 2, yDeadZone * 2));
         }
     }
 }
