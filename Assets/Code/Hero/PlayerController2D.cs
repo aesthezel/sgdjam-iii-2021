@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using Cinemachine;
 using Code.Data;
 using Code.Services;
 using UnityEngine;
@@ -57,6 +58,9 @@ namespace Code.Hero
         
         [BoxGroup("Checkpoint")]
         [SerializeField] private LayerMask whatIsCheckpoint;
+
+        [SerializeField] private CinemachineVirtualCamera cCamera;
+        private CinemachineFramingTransposer _transposer;
         
         // Movement
         private Vector2 _currentVelocity;
@@ -113,6 +117,10 @@ namespace Code.Hero
             get => _grounded;
             private set
             {
+                // Siempre que deje de estar en el suelo que determine donde estaba
+                if (_grounded && !value)
+                    JumpStartHeight = transform.position.y;
+
                 // If player touches the ground...
                 if (!_grounded && value)
                 {
@@ -124,12 +132,11 @@ namespace Code.Hero
                     var info = MultiRayEmiter(_origins.bottomLeft, Vector2.down, 0.08f, whatIsGround);
 
                     if (info.hasHit.Contains(true))
-                    {
-                        Debug.Log(info.hitDistances.Min());
-                        //Debug.Break();
                         transform.Translate(Vector2.down * info.hitDistances.Min());
-                    }
-
+                    
+                    // Comprobar si ha saltado desde muy alto
+                    _jumpStrike = JumpStartHeight - transform.position.y > 5f;
+                    
                     if (_jumpStrike)
                     {
                         var jumpEffect = pooler.Pooler.GetByID("HighJump");
@@ -142,7 +149,6 @@ namespace Code.Hero
                     _currentGravityModifier = gravityModifier;
                     _currentVelocity.y = _currentVelocity.y < 0 ? 0 : _currentVelocity.y;
                 }
-                
                 _grounded = value;
             }
         }
@@ -155,7 +161,7 @@ namespace Code.Hero
         public float FacingDirection => _facingDirection;
         public bool Dashing { get; private set; }
         
-        public float DistanceToGround { get; private set; }
+        public float JumpStartHeight { get; private set; }
         public Vector2 LastCheckpoint { get; private set; }
 
         // -------------------
@@ -166,6 +172,7 @@ namespace Code.Hero
             _myCollider = GetComponent<Collider2D>();
             _mapper = GetComponent<InputMapper>();
             _receiver = GetComponent<PlayerReceiver>();
+            _transposer = cCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
         }
 
         private void Start()
@@ -204,7 +211,12 @@ namespace Code.Hero
             
             //CheckFaceCollisions();
             
-            // Move the amount computed by our physics
+            if(_currentVelocity.y < 0)
+                _transposer.m_DeadZoneHeight = 0;
+            else
+                _transposer.m_DeadZoneHeight = 0.6f;
+
+                // Move the amount computed by our physics
             Move(_currentVelocity * Time.deltaTime);
         }
 
@@ -260,7 +272,7 @@ namespace Code.Hero
             
             dashEvents.checker += CheckDash;
             dashEvents.ok += Dash;
-            //dashEvents.finished += DashFinished;
+            //dashEvents.finished += DashFinished; NOT IMPLEMENTED
         }
         
         
@@ -362,9 +374,7 @@ namespace Code.Hero
         public void GetHit()
         {
             if (_canGetHit)
-            {
                 StartCoroutine(CantGetHit(0.2f));
-            }
         }
 
         private IEnumerator CantGetHit(float time)
@@ -395,6 +405,8 @@ namespace Code.Hero
         // -------------
         // Animation
         // -------------
+        #region ANIMATIONS
+        
         private void UpdateMoveAnimation()
         {
             // Movement Animations
@@ -407,10 +419,13 @@ namespace Code.Hero
         
         private void GroundedAnimation() => bodyAnimator.SetBool(groundedAnimationVar, Grounded);
         
+        # endregion
         
         // -------------
         // Movement
         // -------------
+        #region PLAYER MOVEMENT
+
         private void Move(Vector2 delta)
         {
             // Clamp X if colliding with walls
@@ -448,13 +463,16 @@ namespace Code.Hero
             _currentVelocity.x = _playerInput.x * moveVelocity;
             _canMove = true;
         }
-        
+
+        #endregion
+
         // --------------------------
         // Checkpoint
         // --------------------------
+        #region  CHECKPOINT
+
         public void BackToCheckpoint()
         {
-            DistanceToGround = 0;
             _currentVelocity = Vector2.zero;
             _jumpStrike = false;
             transform.position = LastCheckpoint;
@@ -463,6 +481,8 @@ namespace Code.Hero
             StartCoroutine(DeactivateDelay(effect, 0.2f)); 
         }
 
+        #endregion
+        
         private IEnumerator DeactivateDelay(GameObject go, float time)
         {
             float elapsed = 0;
@@ -479,6 +499,8 @@ namespace Code.Hero
         // --------------------------
         // CUSTOM PHYSICS
         // --------------------------
+        # region CUSTOM PLAYER CONTROLLER PHYSICS
+        
         private void ApplyGravity()
         {
             _currentVelocity.y += gravity * Time.deltaTime * _currentGravityModifier;
@@ -561,14 +583,7 @@ namespace Code.Hero
             var groundInfo = MultiRayEmiter(_origins.bottomLeft, Vector2.down, length, whatIsGround);
             
             if (groundInfo.hasHit.Contains(true))
-            {
                 delta.y = Mathf.Clamp(delta.y, -groundInfo.hitDistances.Min(), float.MaxValue);
-                
-                DistanceToGround = groundInfo.hitDistances.Min();
-
-                if (DistanceToGround > 7f)
-                    _jumpStrike = true;
-            }
         }
         
         private void ClampFaceDirection(ref Vector2 delta)
@@ -593,5 +608,7 @@ namespace Code.Hero
                 _playerCollisions.ResetFaceCollisions();
             }
         }
+        
+        #endregion
     }
 }

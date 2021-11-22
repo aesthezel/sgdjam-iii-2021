@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
 using DG.Tweening;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace Code.Cinematics

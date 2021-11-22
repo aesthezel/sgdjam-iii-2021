@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ServicesSettings
   m_EditorClassIdentifier: 
   servicesPrefabs:
-  - {fileID: 5984014605863478902, guid: a0b1ade52978c3241a597dcba1dc6b11, type: 3}
+  - {fileID: 7720493628747749289, guid: 2bfdabcbc70f95c458439c942fe9e020, type: 3}
   - {fileID: 1307574580578038539, guid: ab14b042ddc4cf346b83dc0280c14b63, type: 3}
   - {fileID: 5631634673724257875, guid: e34001a9a5079704f9b7bd4b8e1c475b, type: 3}
   - {fileID: 8276069833320132469, guid: 9fecb1884e7b7144fbb9249728b3e3da, type: 3}

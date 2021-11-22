@@ -8,6 +8,9 @@ public class ExitGame : MonoBehaviour
     private void Awake()
     {
         exitButton.Enable();
-        exitButton.performed += (_) => Application.Quit();
+        exitButton.performed += (_) => Quit();
     }
+
+    public void Quit() => Application.Quit();
+    
 }
