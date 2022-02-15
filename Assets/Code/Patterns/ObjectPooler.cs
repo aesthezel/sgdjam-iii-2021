@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Code.Data;
 using Code.Services;
-using Code.Utils;
 using UnityEngine;
 
 namespace Code.Patterns
